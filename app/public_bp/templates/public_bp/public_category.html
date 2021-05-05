@@ -1,0 +1,27 @@
+{% extends 'base_public.html' %}
+{% block content %}
+{%for record in records%}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <div>{{ record.name }}</div>
+            <div class="news-block-date">{{ record.created_at }}</div>
+        </h3>
+    </div>
+    <div class="panel-body" style="padding:0;">
+        <div class="news_short_block">
+            <div class="news_preview"><a class="fancybox preview" href=""
+                                         data-fancybox-group="677f2709938efbcd0706ca2ce31bbd55">
+                <div
+                        style="width:130px;height:130px;display:inline-block;background:url('/media/news/09_11_2020/img_2303.jpg') no-repeat center center;background-size:cover;">
+                </div>
+            </a></div>
+            <div class="news_short_body">
+                {{ record.description }}
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><a class="btn btn-sm btn-primary" href="/news/show/878">Читать далее</a></div>
+</div>
+{% endfor %}
+{% endblock %}

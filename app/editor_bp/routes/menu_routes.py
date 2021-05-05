@@ -3,6 +3,11 @@ from app.editor_bp import blueprint
 from app.models import Menu
 
 
+def get_inner_url(url):
+    result = '/'.join(url.split('/')[3:])
+    return result
+
+
 @blueprint.route('/menu/')
 def menu():
     return render_template('editor_bp/menu.html')

@@ -3,6 +3,7 @@ from app.extensions import db
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, BLOB, TEXT, PickleType
 from flask_user import UserMixin
+from datetime import datetime
 
 
 class User(db.Model, UserMixin):
@@ -35,8 +36,10 @@ class Record(db.Model):
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False, unique=True)
     photo = Column(BLOB)
+    description = Column(TEXT)
     text = Column(TEXT)
     category_id = Column(Integer(), db.ForeignKey('categories.id'))
+    created_at = Column(DateTime(), default=datetime.utcnow())
 
 
 class Category(db.Model):  #
