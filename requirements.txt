@@ -1,0 +1,12 @@
+flask
+flask-sqlalchemy
+flask-migrate
+flask-wtf
+flask-babel
+flask-user
+flask-mail
+wtforms
+confuse
+email-validator
+click
+werkzeug

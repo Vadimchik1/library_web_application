@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %} {% endblock %}</title>
+</head>
+<body>
+.
+<ul>
+    <li><a href="{{ url_for('editor.index') }}">Main</a></li>
+    <li><a href="{{ url_for('editor.add_category') }}"> Add category </a></li>
+    <li><a href="{{ url_for('editor.add_record') }}"> Add record </a></li>
+
+    <li><a href="{{ url_for('editor.add_menu') }}"> Add menu_element </a></li>
+    <li><a href="{{ url_for('editor.add_submenu') }}"> Add submenu </a></li>
+</ul>
+{% block content_title %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+</body>
+</html>

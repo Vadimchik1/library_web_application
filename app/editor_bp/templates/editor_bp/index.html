@@ -1,0 +1,69 @@
+{% extends 'base_edit_template.html' %}
+
+{%block sidebar_menu%}
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2><span class="lab la-accusoft"></span> <span>Админ панель</span></h2>
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="{{url_for('editor.add_record')}}"><span class="las la-igloo"></span><span>Записи</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.show_categories')}}"><span class="las la-users"></span><span>Категории</span></a>
+            </li>
+            <li>
+                <a href=""><span class="las la-clipboard-list"></span><span>Меню</span></a>
+            </li>
+            <li>
+                <a href=""><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
+            </li>
+            <li>
+                <a href=""><span class="las la-receipt"></span><span>Партнеры</span></a>
+            </li>
+            <li>
+                <a href=""><span class="las la-user-circle"></span><span>Правая панель</span></a>
+            </li>
+            <li>
+                <a href=""><span class="las la-clipboard-list"></span><span>Метрики</span></a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+{%endblock%}
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+{% block form %}
+<form class="contact_form" action="#" method="post" name="contact_form">
+    <ul>
+        <li>
+            <h2>Contact Us</h2>
+            <span class="required_notification">* Denotes Required Field</span>
+        </li>
+        <li>
+            <label for="name">Name:</label>
+            <input type="text" placeholder="John Doe" required/>
+        </li>
+        <li>
+            <label for="email">Email:</label>
+            <input type="email" name="email" placeholder="john_doe@example.com" required/>
+            <span class="form_hint">Proper format "name@something.com"</span>
+        </li>
+        <li>
+            <label for="website">Website:</label>
+            <input type="url" name="website" placeholder="http://johndoe.com" required pattern="(http|https)://.+"/>
+            <span class="form_hint">Proper format "http://someaddress.com"</span>
+        </li>
+        <li>
+            <label for="message">Message:</label>
+            <textarea name="message" cols="40" rows="6" required></textarea>
+        </li>
+        <li>
+            <button class="submit" type="submit">Submit Form</button>
+        </li>
+    </ul>
+</form>
+{% endblock %}
