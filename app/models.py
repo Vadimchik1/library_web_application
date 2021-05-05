@@ -30,9 +30,6 @@ class UserRoles(db.Model):
     role_id = Column(Integer(), db.ForeignKey('roles.id', ondelete='CASCADE'))
 
 
-
-
-
 class Record(db.Model):
     __tablename__ = 'records'
     id = Column(Integer(), primary_key=True)
@@ -40,9 +37,6 @@ class Record(db.Model):
     photo = Column(BLOB)
     text = Column(TEXT)
     category_id = Column(Integer(), db.ForeignKey('categories.id'))
-
-
-
 
 
 class Category(db.Model):  #
@@ -56,7 +50,8 @@ class SubMenu(db.Model):
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False)
     url = Column(String(250), nullable=True)
-    url_is_inner = Column(Boolean())
+    url_is_inner = Column(Boolean(), default=True)
+    index = Column(Integer, default=None)
     menu_parent_id = Column(Integer(), db.ForeignKey('menu.id'))
 
 
@@ -65,8 +60,10 @@ class Menu(db.Model):
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False)
     url = Column(String(250), nullable=True)
-    url_is_inner = Column(Boolean)
-    massiv_id = Column(PickleType())
+    url_is_inner = Column(Boolean, default=True)
+    is_parent = Column(Boolean, default=True)
+    index = Column(Integer, default=None)
+    massiv_id = Column(PickleType(), default=None)
 
 
 class RightPanel(db.Model):

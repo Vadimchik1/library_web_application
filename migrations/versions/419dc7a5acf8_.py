@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 0b839e4ad97b
+Revision ID: 419dc7a5acf8
 Revises: 
-Create Date: 2021-04-30 20:29:17.412034
+Create Date: 2021-05-05 17:08:18.802230
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0b839e4ad97b'
+revision = '419dc7a5acf8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,17 +24,13 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
-    op.create_table('dtypesrecords',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=250), nullable=False),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
-    )
     op.create_table('menu',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=250), nullable=False),
     sa.Column('url', sa.String(length=250), nullable=True),
     sa.Column('url_is_inner', sa.Boolean(), nullable=True),
+    sa.Column('is_parent', sa.Boolean(), nullable=True),
+    sa.Column('index', sa.Integer(), nullable=True),
     sa.Column('massiv_id', sa.PickleType(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -70,10 +66,8 @@ def upgrade():
     sa.Column('name', sa.String(length=250), nullable=False),
     sa.Column('photo', sa.BLOB(), nullable=True),
     sa.Column('text', sa.TEXT(), nullable=True),
-    sa.Column('disptype_id', sa.Integer(), nullable=True),
     sa.Column('category_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
-    sa.ForeignKeyConstraint(['disptype_id'], ['dtypesrecords.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )
@@ -82,6 +76,7 @@ def upgrade():
     sa.Column('name', sa.String(length=250), nullable=False),
     sa.Column('url', sa.String(length=250), nullable=True),
     sa.Column('url_is_inner', sa.Boolean(), nullable=True),
+    sa.Column('index', sa.Integer(), nullable=True),
     sa.Column('menu_parent_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['menu_parent_id'], ['menu.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -107,6 +102,5 @@ def downgrade():
     op.drop_table('right_panel')
     op.drop_table('partners')
     op.drop_table('menu')
-    op.drop_table('dtypesrecords')
     op.drop_table('categories')
     # ### end Alembic commands ###
