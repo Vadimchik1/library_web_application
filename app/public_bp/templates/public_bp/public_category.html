@@ -1,4 +1,13 @@
 {% extends 'base_public.html' %}
+{% block hnavbar %}
+    <nav class="menu">
+        <ul>
+            {% for el in menu %}
+            <li><a href="{{el.url}}">{{el.name}}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+    {% endblock %}
 {% block content %}
 {%for record in records%}
 <div class="panel panel-default">

@@ -51,7 +51,7 @@ def update_category():
 
 
 @blueprint.route('/delete-category/<id>/', methods=['GET', 'POST'])
-def delete_user(id):
+def delete_category(id):
     category = Category.query.get(id)
     db.session.delete(category)
     db.session.commit()

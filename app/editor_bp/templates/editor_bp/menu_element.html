@@ -46,13 +46,15 @@
     <div class="row">
         <div class="col md-12">
             <div class="bg-light p3">
-                <h2>Управление <b>Меню</b>
-                    <button type="button" class="btn btn-success float-end"
-                            data-bs-toggle="modal" data-bs-target="#create_modal">Добавить элемент меню
-                    </button>
-                    <a href="{{url_for('editor.drag_drop_menu')}}" class="btn btn-warning btn-xs">Изменить
+                <h2>Управление: <b>"{{ menu_name }}"</b>
+                    <a href="{{url_for('editor.drag_drop_submenu', id=parent_id)}}" class="btn btn-warning btn-xs">Изменить
                         расположение</a>
+                    <button type="button" class="btn btn-success float-end"
+                            data-bs-toggle="modal" data-bs-target="#create_modal">Добавить подменю
+                    </button>
+
                 </h2>
+
 
                 {% with messages = get_flashed_messages() %}
 
@@ -80,20 +82,16 @@
                         <th>Роль</th>
                         <th>Действия</th>
                     </tr>
-                    {% for row in menu_list %}
+                    {% for row in menu_el_children %}
                     <tr>
                         <td>{{ row.id }}</td>
                         <td>{{ row.name }}</td>
                         <td>{{row.index}}</td>
                         <td>{{row.is_inner}}</td>
                         <td>
-                            <a href="{{url_for('editor.update_menu_parent')}}" class="btn btn-warning btn-xs"
-                               data-bs-toggle="modal"
+                            <a href="{{url_for('editor.update_submenu')}}" class="btn btn-warning btn-xs" data-bs-toggle="modal"
                                data-bs-target="#edit_modal{{ row.id }}">Изменить</a>
-                            {% if row.is_parent %}
-                            <a href="{{url_for('editor.show_menu_element', id=row.id)}}" class="btn btn-warning btn-xs">Просмотреть</a>
-                            {% endif %}
-                            <a href="{{url_for('editor.delete_menu_parent', id=row.id)}}" class="btn btn-danger btn-xs"
+                            <a href="{{url_for('editor.delete_submenu', id=row.id)}}" class="btn btn-danger btn-xs"
                                onclick="return confirm('Вы хотите удалить? ?')">Удалить</a>
                         </td>
                     </tr>
@@ -101,12 +99,12 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Изменить название категории</h4>
+                                    <h4 class="modal-title">Изменить название подменю элемента</h4>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ url_for('editor.update_menu_parent') }}" method="post">
+                                    <form action="{{ url_for('editor.update_submenu') }}" method="post">
                                         <div class="form-group">
                                             <label>Название:</label>
                                             <input type="hidden" name="id" value="{{ row.id }}">
@@ -132,22 +130,24 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Add Employee</h4>
+                                <h4 class="modal-title">Добавить элемент</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form action="{{ url_for('editor.insert_menu_parent') }}" method="post">
+
+
+
+                                <form action="{{ url_for('editor.insert_submenu', id=parent_id) }}" method="post">
+
+
+
                                     <div class="form-group">
                                         <label>Название:</label>
 
                                         <input type="text" class="form-control" name="name" required="1">
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Родитель?</label>
-                                        <input type="checkbox" name="parent">
-                                    </div>
                                     <div class="form-group">
                                         <label>Адрес внутренний?</label>
                                         <input type="checkbox" name="inner">

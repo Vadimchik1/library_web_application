@@ -1,0 +1,21 @@
+ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+#response {
+    padding: 10px;
+    background-color: #9F9;
+    border: 2px solid #396;
+    margin-bottom: 20px;
+}
+
+#list li {
+    margin: 0 0 3px;
+    padding: 8px;
+    text-align: left;
+    background-color: #00CCCC;
+    color: #fff;
+    list-style: none;
+    border: #CCCCCC solid 1px;
+}
