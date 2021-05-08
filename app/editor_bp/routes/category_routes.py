@@ -84,16 +84,10 @@ def record(id):
 def add_record():
     form = AddRecordForm()
     categories = Category.query.all()
-    # if form.validate_on_submit():
-    #     record = Record(name=form.name.data, text=form.text.data, category_id=int(form.category.data))
-    #     db.session.add(record)
-    #     db.session.commit()
-    #     return redirect(url_for('editor.add_record'))
     if request.method == 'POST':
-        print(request.form['category'])
         category_name = request.form['category']
         record = Record(name=request.form['name'], category_id=get_category_id(category_name), photo=None,
-                        text=request.form['editordata'])
+                        text=request.form['editordata'], description=request.form['description'])
         db.session.add(record)
         db.session.commit()
         return redirect(url_for('editor.add_record'))

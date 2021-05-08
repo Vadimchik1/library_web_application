@@ -9,6 +9,8 @@
 html{
     background: #EAEAEA;
 }
+
+
 .menu{
     position: relative;
 }
@@ -25,8 +27,12 @@ html{
 }
 .menu ul li{
     padding-right: 1.5rem;
-    
 }
+
+.menu ul li:hover{
+     
+}
+
 .menu ul li a{
     color: #fff;
     font-weight: 300;
@@ -36,6 +42,14 @@ html{
 .menu ul li.active a{
     font-weight: 700;
     text-decoration:underline;
+}
+.submenu{
+    padding-top: 30px;
+    flex-direction: column;
+    /* background-color: #007DB2; */
+}
+.submenu li{
+    /* display: none; */
 }
 .header-up{
     display: flex;

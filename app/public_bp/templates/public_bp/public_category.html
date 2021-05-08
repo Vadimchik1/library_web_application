@@ -1,13 +1,22 @@
 {% extends 'base_public.html' %}
 {% block hnavbar %}
-    <nav class="menu">
-        <ul>
-            {% for el in menu %}
-            <li><a href="{{el.url}}">{{el.name}}</a></li>
-            {% endfor %}
+<nav class="menu">
+    <ul>
+        {% for el in menu.keys() %}
+        <li><a href="{%if el.is_parent%}
+        {% else %}
+        {{el.url}}
+        {%endif%}">{{el.name}}</a>
+        <ul class="submenu">
+            {%for elem in menu[el]%}
+            <li><a href="{{elem.url}}">{{elem.name}}</a></li>
+            {%endfor%}
         </ul>
-    </nav>
-    {% endblock %}
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+{% endblock %}
 {% block content %}
 {%for record in records%}
 <div class="panel panel-default">

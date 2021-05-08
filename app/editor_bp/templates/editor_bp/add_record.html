@@ -47,31 +47,32 @@
 {% endblock %}
 {% block form %}
 
-<form action="" method="post" class="form-contact">
+<form action="" method="post" class="form-record">
     <li>
-        <h2>Добавить запись</h2>
+        <h2>Новая запись:</h2>
         <!--            <span class="required_notification">* Denotes Required Field</span>-->
     </li>
     <li>
-        <label>Name</label> <input type="text" name="name">
+        <label>Название:</label> <input type="text" name="name" placeholder="Введите название записи...">
     </li>
     <li>
-        <label>Категория</label>
+        <label>Категория:</label>
         <select name="category">
             {% for i in categories %}
             <option>{{i.name}}</option>
             {% endfor %}
         </select>
     </li>
+    <li>Описание:<textarea name="description" class="record-description" placeholder="Введите описание записи..."></textarea></li>
     <li><textarea id="summernote" name="editordata"></textarea></li>
     <li>
-        <button>Добавить</button>
+        <button class="record-button">Добавить</button>
     </li>
 
 </form>
 <script>
       $('#summernote').summernote({
-        placeholder: 'Hello stand alone ui',
+        placeholder: 'Введите текст вашего поста...',
         tabsize: 2,
         height: 600,
         toolbar: [
