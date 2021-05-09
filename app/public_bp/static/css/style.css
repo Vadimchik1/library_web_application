@@ -10,12 +10,29 @@ html{
     background: #EAEAEA;
 }
 
-
-.menu{
-    position: relative;
+.topnav{
+  position: relative;
+  margin: 0 auto 30px;
+  
 }
-.menu ul{
-    height: 1rem;
+.topnav ul {
+    background: #2A5EA7;
+  }
+  .topnav ul a {
+    color: #fff;
+  }
+  .topnav .submenu {
+    display: none;
+    background: #fff;
+  }
+  .topnav ul li:hover .submenu {
+    display: block;
+  }
+.menu{
+    
+}
+.menu {
+    height: 1rem; 
     position: absolute;
     top: 0;
     bottom: 0;
@@ -23,33 +40,55 @@ html{
     display: flex;
     justify-content: start;
     align-content: space-around;
-    padding-left: 1.5rem;
+    padding-left: 1.5rem; 
+    list-style: none; 
+  margin: 0;
+  padding: 0;
 }
-.menu ul li{
-    padding-right: 1.5rem;
+.menu li{
+    /* padding-right: 1.5rem; */
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+
+}
+.menu li:last-child{
+    margin-right: 0;
 }
 
-.menu ul li:hover{
-     
-}
-
-.menu ul li a{
-    color: #fff;
+.menu li a{
+    /* color: #fff;
     font-weight: 300;
-    color: #fff;
+    color: #fff; */
+    display: block;
+
+  text-decoration: none;
+  outline: none;
+  font-family: 'Lora', serif;
+
 
 }
-.menu ul li.active a{
+.menu li.active a{
     font-weight: 700;
     text-decoration:underline;
 }
 .submenu{
-    padding-top: 30px;
-    flex-direction: column;
+    /* padding-top: 30px;
+    flex-direction: column; */
     /* background-color: #007DB2; */
+    position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
-.submenu li{
+.submenu li a{
     /* display: none; */
+    color: #000;
 }
 .header-up{
     display: flex;
@@ -253,7 +292,8 @@ main{
 
 .news_short_block {
     display: flex;
-    padding-bottom: 100px;
+    padding: 1rem;
+    min-height: 10rem;
 }
 .news_short_block .news_preview {
     flex-basis: 150px;

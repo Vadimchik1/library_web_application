@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash, jsonify
 from app.editor_bp import blueprint
 from app.models import Menu, db, SubMenu
-from sqlalchemy import and_
+
 
 
 def get_inner_url(url):
@@ -11,9 +11,10 @@ def get_inner_url(url):
 
 @blueprint.route('/menu/')
 def menu():
+    title = 'Меню'
     menu_list = Menu.query.all()
 
-    return render_template('editor_bp/menu.html', menu_list=menu_list)
+    return render_template('editor_bp/menu.html', menu_list=menu_list, title=title)
 
 
 @blueprint.route('/insert_menu_parent', methods=['POST'])
@@ -87,13 +88,13 @@ def drag_drop_menu():
     # dragdrop = Menu.query.all()
     drag_drop = db.session.query(Menu).order_by(Menu.index).all()
     print(drag_drop)
-    return render_template('editor_bp/drag_drop_menu.html', dragdrop=drag_drop)
+    return render_template('editor_bp/drag_drop_menu.html', dragdrop=drag_drop, title='Изменение меню')
 
 
 @blueprint.route('/submenu/<id>/change-location/')
 def drag_drop_submenu(id):
     drag_drop = db.session.query(SubMenu).filter_by(menu_parent_id=id).order_by(SubMenu.index).all()
-    return render_template('editor_bp/drag_drop_submenu.html', dragdrop=drag_drop)
+    return render_template('editor_bp/drag_drop_submenu.html', dragdrop=drag_drop, title='Изменение подменю')
 
 
 @blueprint.route('/menu/change-location/updateList', methods=["POST"])
@@ -110,6 +111,7 @@ def update_menu_location():
             db.session.commit()
         return jsonify('Порядок был изменен')
 
+
 @blueprint.route('/submenu/change-location/updateList', methods=["POST"])
 def update_submenu_location():
     if request.method == 'POST':
@@ -124,12 +126,13 @@ def update_submenu_location():
             db.session.commit()
         return jsonify('Порядок был изменен')
 
+
 @blueprint.route('/show_menu_element/<id>', methods=['GET', 'POST'])
 def show_menu_element(id):
     menu_el_children = SubMenu.query.filter_by(menu_parent_id=id).all()
     menu_name = Menu.query.filter_by(id=id).first().name
     return render_template('editor_bp/menu_element.html', menu_el_children=menu_el_children, menu_name=menu_name,
-                           parent_id=id)
+                           parent_id=id,title=menu_name)
 
 
 @blueprint.route('/insert_submenu/<id>', methods=['POST'])

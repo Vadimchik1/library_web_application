@@ -1,19 +1,54 @@
 {% extends 'base_public.html' %}
+{% block head %}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+{% endblock %}
+{% block hnavbar %}
+<nav class="topnav">
+    <ul class="menu">
+        {% for el in menu.keys() %}
+        <li><a href="{%if el.is_parent%}
+        {% else %}
+        {{el.url}}
+        {%endif%}">{{el.name}}</a>
+        <ul class="submenu">
+            {%for elem in menu[el]%}
+            <li><a href="{{elem.url}}">{{elem.name}}</a></li>
+            {%endfor%}
+        </ul>
+        </li>
+        {% endfor %}
+    </ul>
+</nav>
+{% endblock %}
+
 {% block content %}
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
             <div>{{ record.name }}</div>
-            <div class="news-block-date">{{ record.created_at }}</div>
+            <div class="news-block-date">
+                <div>
+                {{ record.created_at }}
+                    </div>
+            </div>
         </h3>
     </div>
     <div class="panel-body" style="padding:0;">
+
         <div class="news_short_block">
-                {{ record.text }}
-            </div>
+            <div>
+            {{record.text|safe}}
+                </div>
         </div>
+
     </div>
 </div>
+
 
 {% endblock %}

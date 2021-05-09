@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from app.extensions import db
-from datetime import datetime
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, BLOB, TEXT, PickleType
 from flask_user import UserMixin
 from datetime import datetime
@@ -79,3 +78,5 @@ class Partners(db.Model):
     __tablename__ = 'partners'
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False)
+    url = Column(String(250), nullable=False)
+    image = Column(BLOB, nullable=False)

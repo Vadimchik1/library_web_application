@@ -1,5 +1,7 @@
 {% extends 'base_edit_template.html' %}
 
+{% block title %}{{title}}{% endblock %}
+
 {% block head %}
 <link rel="stylesheet" href="{{url_for('admin.static', filename = 'css/bootstrap.min.css')}}">
 {% endblock %}
@@ -23,7 +25,7 @@
                 <a href=""><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
             </li>
             <li>
-                <a href=""><span class="las la-receipt"></span><span>Партнеры</span></a>
+                <a href="{{url_for('editor.show_partners')}}"><span class="las la-receipt"></span><span>Партнеры</span></a>
             </li>
             <li>
                 <a href=""><span class="las la-user-circle"></span><span>Правая панель</span></a>

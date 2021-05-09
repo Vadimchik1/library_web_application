@@ -1,5 +1,7 @@
 {% extends 'base_edit_template.html' %}
+
 {% block title %}{{title}}{% endblock %}
+
 {% block head %}
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -17,7 +19,7 @@
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a href="" class="active"><span class="las la-igloo"></span><span>Записи</span></a>
+                <a href="{{url_for('editor.add_record')}}"><span class="las la-igloo"></span><span>Записи</span></a>
             </li>
             <li>
                 <a href="{{url_for('editor.show_categories')}}"><span class="las la-users"></span><span>Категории</span></a>
@@ -29,7 +31,7 @@
                 <a href=""><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
             </li>
             <li>
-                <a href="{{url_for('editor.show_partners')}}"><span class="las la-receipt"></span><span>Партнеры</span></a>
+                <a href=""><span class="las la-receipt"></span><span>Партнеры</span></a>
             </li>
             <li>
                 <a href=""><span class="las la-user-circle"></span><span>Правая панель</span></a>
@@ -46,48 +48,25 @@
 {% include 'header.html' %}
 {% endblock %}
 {% block form %}
-{% with messages = get_flashed_messages() %}
 
-                {% if messages %}
-
-                {% for message in messages %}
-                <div class="alert alert-success alert-dismissable" role="alert">
-                    <button type="button" class="close" data-bs-dismiss="alert" aria-label="close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                    {{ message }}
-                </div>
-                {% endfor %}
-
-                {% endif %}
-
-                {% endwith %}
-<form action="" method="post" class="form-record">
+<form action="" method="post" class="form-contact">
     <li>
-        <h2>Новая запись:</h2>
+        <h2>Изменить запись</h2>
         <!--            <span class="required_notification">* Denotes Required Field</span>-->
     </li>
     <li>
-        <label>Название:</label> <input type="text" name="name" placeholder="Введите название записи...">
+        <label>Название</label> <input type="text" name="name" value="{{record_item.name}}">
     </li>
+
+    <li><textarea id="summernote" name="editordata">{{record_item.text}}</textarea></li>
     <li>
-        <label>Категория:</label>
-        <select name="category">
-            {% for i in categories %}
-            <option>{{i.name}}</option>
-            {% endfor %}
-        </select>
-    </li>
-    <li>Описание:<textarea name="description" class="record-description" placeholder="Введите описание записи..."></textarea></li>
-    <li><textarea id="summernote" name="editordata"></textarea></li>
-    <li>
-        <button class="record-button">Добавить</button>
+        <button>Изменить</button>
     </li>
 
 </form>
 <script>
       $('#summernote').summernote({
-        placeholder: 'Введите текст вашего поста...',
+        placeholder: 'Hello stand alone ui',
         tabsize: 2,
         height: 600,
         toolbar: [
