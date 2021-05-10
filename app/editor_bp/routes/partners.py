@@ -17,10 +17,10 @@ def add_partner():
     if request.method == 'POST':
         name = request.form['name']
         url = request.form['url_address']
-        if name is '':
+        if name == '':
             flash('Не было введено название файла...')
             return redirect(url_for('editor.add_partner'))
-        if url is '':
+        if url == '':
             flash('Не был введен адрес ссылки...')
             return redirect(url_for('editor.add_partner'))
         if Path(request.files['file'].filename).suffix not in files_suffixes:
