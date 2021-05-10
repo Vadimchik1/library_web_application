@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from app.extensions import db
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, BLOB, TEXT, PickleType
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, BLOB, TEXT, PickleType, Date
 from flask_user import UserMixin
 from datetime import datetime
 
@@ -39,12 +39,18 @@ class Record(db.Model):
     text = Column(TEXT)
     category_id = Column(Integer(), db.ForeignKey('categories.id'))
     created_at = Column(DateTime(), default=datetime.utcnow())
+    normal_date = Column(Date(), default=datetime.utcnow())
+    url = Column(String(250))
+
+
 
 
 class Category(db.Model):  #
     __tablename__ = 'categories'
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False, unique=True)
+    url = Column(String(250))
+
 
 
 class SubMenu(db.Model):
@@ -66,6 +72,15 @@ class Menu(db.Model):
     is_parent = Column(Boolean, default=True)
     index = Column(Integer, default=None)
     massiv_id = Column(PickleType(), default=None)
+
+
+class FastAccess(db.Model):
+    __tablename__ = 'fast_access'
+    id = Column(Integer(), primary_key=True)
+    name = Column(String(250), nullable=False)
+    url = Column(String(250), nullable=True)
+    url_is_inner = Column(Boolean, default=True)
+    index = Column(Integer, default=None)
 
 
 class RightPanel(db.Model):

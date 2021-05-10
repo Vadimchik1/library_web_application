@@ -13,7 +13,9 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
     <title>Document</title>
+
     {% block head %}{% endblock %}
 </head>
 
@@ -22,7 +24,7 @@
     <div class="header-up">
         <div class="header-left">
             <div class="logo">
-                <img src="images/logo.jpg" alt="">
+                <img src="{{url_for('public.static', filename = 'images/logo.jpg')}}" alt="">
             </div>
             <div class="heading-h1">
                 <h1>Карагандинский технический университет</h1>
@@ -31,12 +33,14 @@
         </div>
         <div class="header-right">
             <div class="lang-button">
+                <div class="lang-text">RU</div>
             </div>
             <div class="bad-vision">
+                <div class="bad-vision-text">Версия для слабовидящих</div>
             </div>
             <div class="search-wrapper">
                 <span class="las la-search"></span>
-                <input type="search" placeholder="Search here">
+                <input type="search" placeholder="Поиск">
             </div>
         </div>
     </div>
@@ -47,39 +51,36 @@
     <div class="left-sidebar">
         <div class="left-sidebar-menu">
             <ul>
+
                 <li class="sidebar-main">
                     <a href="" class="active"><span>Быстрый доступ</span></a>
                 </li>
+                {%for elem in fast_access%}
                 <li>
-                    <a href="" class="active"><span>Электронный каталог</span></a>
-
+                    <a href="{{elem.url}}" class="active"><span>{{elem.name}}</span></a>
                 </li>
-                <li>
-                    <a href=""><span>Ресурсы</span></a>
-                    <div class="sidebar-submenu">
-                        <div class="sidebar-submenu-item">DD</div>
-                        <div class="sidebar-submenu-item">DD</div>
-                        <div class="sidebar-submenu-item">DD</div>
-                    </div>
-                </li>
-                <li>
-                    <a href=""></span><span>Выставки</span></a>
-                </li>
-                <li>
-                    <a href=""><span>Подписка и приобретение</span></a>
-                </li>
-                <li>
-                    <a href=""></span><span>Новые поступления</span></a>
-                </li>
-                <li>
-                    <a href=""><span>Наукометрия</span></a>
-                </li>
-                <li>
-                    <a href=""><span>Периодические издания КарТУ</span></a>
-                </li>
-                <li>
-                    <a href=""><span>Юбиляры</span></a>
-                </li>
+                {% endfor%}
+                <!--                <li>-->
+                <!--                    <a href=""><span>Ресурсы</span></a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href=""></span><span>Выставки</span></a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href=""><span>Подписка и приобретение</span></a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href=""></span><span>Новые поступления</span></a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href=""><span>Наукометрия</span></a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href=""><span>Периодические издания КарТУ</span></a>-->
+                <!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a href=""><span>Юбиляры</span></a>-->
+                <!--                </li>-->
             </ul>
         </div>
     </div>
@@ -145,15 +146,11 @@
 </main>
 <footer>
     <div class="partners-list">
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
-        <a class="partner" href=""><img src="images/BANNER-1.jpg" alt=""></a>
+        {% for partner in partners %}
+        <a class="partner" href="{{partner.url}}"><img src="{{url_for('public.partner_img', id=partner.id)}}"
+                                                       alt=""></a>
+        {% endfor %}
+
     </div>
     <div class="about-site">
         <p>Карагандинский технический университет</p>

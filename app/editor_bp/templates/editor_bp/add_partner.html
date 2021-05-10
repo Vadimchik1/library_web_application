@@ -26,7 +26,7 @@
                 <a href="{{url_for('editor.menu')}}"><span class="las la-clipboard-list"></span><span>Меню</span></a>
             </li>
             <li>
-                <a href=""><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
+                <a href="{{url_for('editor.fast_access')}}"><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
             </li>
             <li>
                 <a href="{{url_for('editor.show_partners')}}"><span class="las la-receipt"></span><span>Партнеры</span></a>
@@ -62,7 +62,7 @@
 {% endif %}
 
 {% endwith %}
-<form action="" method="post" class="form-record">
+<form action="" method="post" class="form-record" enctype="multipart/form-data">
     <li>
         <h2>Добавить партнера:</h2>
         <!--            <span class="required_notification">* Denotes Required Field</span>-->
@@ -72,11 +72,11 @@
     </li>
 
     <li>
-        <label>Url-адрес:</label> <input type="text" name="url-address" placeholder="Введите url адрес...">
+        <label>Url-адрес:</label> <input type="text" name="url_address" placeholder="Введите url адрес...">
     </li>
     <li>
         <label for="file" class="col-sm-2 control-label">Картинка:</label>
-        <input type="file" name="file" id="file">
+        <input type="file"  name="file" id="file">
     </li>
 
     <li>

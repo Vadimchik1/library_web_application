@@ -1,6 +1,7 @@
 {% extends 'base_public.html' %}
 {% block hnavbar %}
-<nav class="topnav">
+<nav  class="topnav">
+
     <ul class="menu">
         {% for el in menu.keys() %}
         <li><a href="{%if el.is_parent%}
@@ -9,13 +10,20 @@
         {%endif%}">{{el.name}}</a>
         <ul class="submenu">
             {%for elem in menu[el]%}
+            {% if elem.is_parent == True %}
             <li><a href="{{elem.url}}">{{elem.name}}</a></li>
+            {% else %}
+            <li class="parent"><a href="{{elem.url}}">{{elem.name}}</a></li>
+            {% endif %}
             {%endfor%}
         </ul>
         </li>
         {% endfor %}
+
+
     </ul>
-</nav>
+
+    </nav>
 {% endblock %}
 {% block content %}
 {%for record in records%}
@@ -23,7 +31,12 @@
     <div class="panel-heading">
         <h3 class="panel-title">
             <div>{{ record.name }}</div>
+            {%if record.normal_date == None%}
             <div class="news-block-date">{{ record.created_at }}</div>
+
+            {%else%}
+            <div class="news-block-date">{{ record.normal_date }}</div>
+            {%endif%}
         </h3>
     </div>
     <div class="panel-body" style="padding:0;">

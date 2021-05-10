@@ -22,7 +22,7 @@
                 <a href="{{url_for('editor.menu')}}"><span class="las la-clipboard-list"></span><span>Меню</span></a>
             </li>
             <li>
-                <a href=""><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
+                <a href="{{url_for('editor.fast_access')}}"><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
             </li>
             <li>
                 <a href="" class="active"><span class="las la-receipt"></span><span>Партнеры</span></a>
@@ -74,51 +74,22 @@
                     <tr>
                         <th>ID</th>
                         <th>Название</th>
-                        <th>Фото</th>
+                        <th>URl</th>
+
+
                         <th>Действия</th>
                     </tr>
-                    {% for row in categories %}
+                    {% for row in partners %}
                     <tr>
                         <td>{{ row.id }}</td>
                         <td>{{ row.name }}</td>
-                        <td>{{ row.image }}</td>
+                        <td>{{ row.url }}</td>
                         <td>
-                            <a href="edit/update-partner/{{row.id}}" class="btn btn-warning btn-xs" data-bs-toggle="modal"
-                               data-bs-target="#edit_modal{{ row.id }}">Изменить</a>
-                            <a href="" class="btn btn-warning btn-xs" >Просмотреть</a>
-                            <a href="delete-category/{{row.id}}" class="btn btn-danger btn-xs"
+                            <a href="{{ url_for('editor.delete_partner', id=row.id) }}" class="btn btn-danger btn-xs"
                                onclick="return confirm('Вы хотите удалить? ?')">Удалить</a>
                         </td>
                     </tr>
-                    <div id="edit_modal{{ row.id }}" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Изменить название категории</h4>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ url_for('editor.update_category') }}" method="post">
-                                        <div class="form-group">
-                                            <label>Название:</label>
-                                            <input type="hidden" name="id" value="{{ row.id }}">
-                                            <input type="text" class="form-control" name="name" required="1"
-                                                   value="{{ row.name }}">
-                                        </div>
 
-                                        <div class="form-group">
-                                            <button class="btn btn-primary" type="submit">Изменить</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     {% endfor%}
                 </table>
             </div>

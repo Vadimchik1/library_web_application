@@ -13,6 +13,10 @@ html{
 .topnav{
   position: relative;
   margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  font-size: 1.18rem;
   
 }
 .topnav ul {
@@ -25,15 +29,19 @@ html{
     display: none;
     background: #fff;
   }
+  
+
+  
   .topnav ul li:hover .submenu {
     display: block;
   }
+
 .menu{
     
 }
 .menu {
     height: 1rem; 
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     bottom: 0;
     margin: auto 0;
@@ -44,10 +52,11 @@ html{
     list-style: none; 
   margin: 0;
   padding: 0;
+  flex-wrap: wrap;
 }
 .menu li{
     /* padding-right: 1.5rem; */
-    display: inline-block;
+    /* display: inline-block; */
     margin-right: 20px;
     position: relative;
 
@@ -77,14 +86,25 @@ html{
     flex-direction: column; */
     /* background-color: #007DB2; */
     position: absolute;
-  top: 100%;
+    top: 100%;
   left: 0;
-  width: 100%;
+  min-width: 100%;
   z-index: 10;
   -webkit-transition: 0.5s ease-in-out;
   -moz-transition: 0.5s ease-in-out;
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
+  padding: .085rem .47rem;
+  border-radius: 7px;
+
+}
+.submenu li {
+    padding: .34rem 0;
+}
+.submenu li:hover a{
+    /* text-decoration: underline; */
+    color:#2d6ca2
+    
 }
 .submenu li a{
     /* display: none; */
@@ -137,6 +157,14 @@ html{
     height: 42px;
     background: #5683BC;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lang-text{
+    color: #e8e8e8;
+    font-size: 1.2rem;
+
 }
 .bad-vision{
     width: 181.79px;
@@ -144,6 +172,14 @@ html{
     
     background: #EFB256;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.bad-vision-text{
+    color: #fff;
+    font-size: 1rem;
+    text-align: center;
 }
 .search-wrapper {
     border: 1px solid #fff;
@@ -152,6 +188,8 @@ html{
     display: flex;
     align-items: center;
     overflow-x: hidden;
+    background: white;
+
 }
 
 .search-wrapper span{
@@ -165,10 +203,12 @@ html{
     padding: .5rem;
     border: none;
     outline: none;
+    font-size: 1rem;
 }
-.header nav {
+.header .topnav {
     height: 4.8rem;
     background: #2A5EA7;
+
 }
 
 main{

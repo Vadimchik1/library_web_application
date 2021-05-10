@@ -3,8 +3,9 @@ from app.editor_bp import blueprint
 from app.models import Menu, db, SubMenu
 
 
-
 def get_inner_url(url):
+    if len(url.split('/')) == 3:
+        return url
     result = '/'.join(url.split('/')[3:])
     return result
 
@@ -20,32 +21,32 @@ def menu():
 @blueprint.route('/insert_menu_parent', methods=['POST'])
 def insert_menu_parent():
     if request.method == 'POST':
-        print(type(request.form))
-        print(request.form)
         name = request.form['name']
         index_el = len(Menu.query.all()) + 1
-        print(index_el)
-        if 'parent' in request.form:
-            is_parent = True
-            menu_el = Menu(name=name, is_parent=is_parent, url_is_inner=None, url=None, index=index_el)
-            db.session.add(menu_el)
-            db.session.commit()
-            return redirect(url_for('editor.menu'))
-        else:
-            print('парента нету')
+        is_parent = True
+        menu_el = Menu(name=name, is_parent=is_parent, url_is_inner=None, url=None, index=index_el)
+        db.session.add(menu_el)
+        db.session.commit()
+        flash('Категория была успешно добавлена')
+        return redirect(url_for('editor.menu'))
 
-        is_parent = False
 
+@blueprint.route('/insert_menu_link', methods=['POST'])
+def insert_menu_link():
+    if request.method == 'POST':
+        name = request.form['name']
+        index_el = len(Menu.query.all()) + 1
         if 'inner' in request.form:
             is_inner = True
         else:
             is_inner = False
-
         if is_inner:
             url = get_inner_url(request.form['url'])
         else:
             url = request.form['url']
-        menu_el = Menu(name=name, is_parent=is_parent, url_is_inner=is_inner, url=url, index=index_el)
+        print(request.form['url'])
+        print('it is url: ', url, '')
+        menu_el = Menu(name=name, is_parent=False, url_is_inner=is_inner, url=url, index=index_el)
         db.session.add(menu_el)
         db.session.commit()
         flash('Категория была успешно добавлена')
@@ -57,6 +58,8 @@ def update_menu_parent():
     if request.method == 'POST':
         menu_el = Menu.query.get(request.form.get('id'))
         menu_el.name = request.form['name']
+        if menu_el.is_parent == False:
+            menu_el.url = request.form['url']
         db.session.add(menu_el)
         db.session.commit()
         flash("Название было изменено")
@@ -91,17 +94,10 @@ def drag_drop_menu():
     return render_template('editor_bp/drag_drop_menu.html', dragdrop=drag_drop, title='Изменение меню')
 
 
-@blueprint.route('/submenu/<id>/change-location/')
-def drag_drop_submenu(id):
-    drag_drop = db.session.query(SubMenu).filter_by(menu_parent_id=id).order_by(SubMenu.index).all()
-    return render_template('editor_bp/drag_drop_submenu.html', dragdrop=drag_drop, title='Изменение подменю')
-
-
 @blueprint.route('/menu/change-location/updateList', methods=["POST"])
 def update_menu_location():
     if request.method == 'POST':
         order = request.form['order'].split(',')
-        menu_list = Menu.query.all()
         count = 0
         for value in order:
             count += 1
@@ -116,7 +112,6 @@ def update_menu_location():
 def update_submenu_location():
     if request.method == 'POST':
         order = request.form['order'].split(',')
-        menu_list = Menu.query.all()
         count = 0
         for value in order:
             count += 1
@@ -132,7 +127,7 @@ def show_menu_element(id):
     menu_el_children = SubMenu.query.filter_by(menu_parent_id=id).all()
     menu_name = Menu.query.filter_by(id=id).first().name
     return render_template('editor_bp/menu_element.html', menu_el_children=menu_el_children, menu_name=menu_name,
-                           parent_id=id,title=menu_name)
+                           parent_id=id, title=menu_name)
 
 
 @blueprint.route('/insert_submenu/<id>', methods=['POST'])
@@ -164,6 +159,7 @@ def update_submenu():
         print(request)
         submenu_el = SubMenu.query.get(request.form.get('id'))
         submenu_el.name = request.form['name']
+        submenu_el.url = request.form['url']
         db.session.add(submenu_el)
         db.session.commit()
         flash("Название было изменено")
@@ -178,7 +174,6 @@ def delete_submenu(id):
     db.session.delete(submenu_el)
     db.session.commit()
     submenu_els = SubMenu.query.filter_by(menu_parent_id=parent_id).all()
-    print(submenu_els)
     for el in submenu_els:
         if el.index > index_del_el:
             el.index -= 1

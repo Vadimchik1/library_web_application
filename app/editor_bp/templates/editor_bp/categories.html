@@ -13,10 +13,10 @@
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a href="{{url_for('editor.add_record')}}" ><span class="las la-igloo"></span><span>Записи</span></a>
+                <a href="{{url_for('editor.add_record')}}"><span class="las la-igloo"></span><span>Записи</span></a>
             </li>
             <li>
-                <a href="" class="active"><span class="las la-users"></span><span>Категории</span></a>
+                <a href="{{url_for('editor.fast_access')}}" class="active"><span class="las la-users"></span><span>Категории</span></a>
             </li>
             <li>
                 <a href="{{url_for('editor.menu')}}"><span class="las la-clipboard-list"></span><span>Меню</span></a>
@@ -45,16 +45,16 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-<div class="row">
+    <div class="row">
         <div class="col md-12">
             <div class="bg-light p3">
-                <h2>Управление  <b>категориями</b>
+                <h2>Управление <b>категориями</b>
                     <button type="button" class="btn btn-success float-end"
                             data-bs-toggle="modal" data-bs-target="#create_modal">Добавить категорию
                     </button>
                 </h2>
 
-                                {% with messages = get_flashed_messages() %}
+                {% with messages = get_flashed_messages() %}
 
                 {% if messages %}
 
@@ -76,17 +76,20 @@
                     <tr>
                         <th>ID</th>
                         <th>Название</th>
+                        <th>URL</th>
                         <th>Действия</th>
                     </tr>
                     {% for row in categories %}
                     <tr>
                         <td>{{ row.id }}</td>
                         <td>{{ row.name }}</td>
+                        <td>{{ row.url }}</td>
                         <td>
-                            <a href="edit/update-category/{{row.id}}" class="btn btn-warning btn-xs" data-bs-toggle="modal"
+                            <a href="edit/update-category/{{row.id}}" class="btn btn-warning btn-xs"
+                               data-bs-toggle="modal"
                                data-bs-target="#edit_modal{{ row.id }}">Изменить</a>
-                            <a href="{{url_for('editor.category', id=row.id)}}" class="btn btn-warning btn-xs" >Просмотреть</a>
-                            <a href="delete-category/{{row.id}}" class="btn btn-danger btn-xs"
+                            <a href="{{url_for('editor.category', id=row.id)}}" class="btn btn-warning btn-xs">Просмотреть</a>
+                            <a href="{{ url_for('editor.delete_category', id=row.id) }}" class="btn btn-danger btn-xs"
                                onclick="return confirm('Вы хотите удалить? ?')">Удалить</a>
                         </td>
                     </tr>
@@ -149,7 +152,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </div>
 {% endblock %}
 

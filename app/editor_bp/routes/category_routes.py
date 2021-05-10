@@ -50,6 +50,10 @@ def insert_category():
         category = Category(name=name)
         db.session.add(category)
         db.session.commit()
+        cat = Category.query.filter_by(name=request.form['name']).first()
+        cat.url = f'/categories/{cat.id}'
+        db.session.add(cat)
+        db.session.commit()
         flash('Категория была успешно добавлена')
         return redirect(url_for('editor.show_categories'))
 
@@ -65,7 +69,7 @@ def update_category():
         return redirect(url_for('editor.show_categories'))
 
 
-@blueprint.route('/delete-category/<id>/', methods=['GET', 'POST'])
+@blueprint.route('/delete-category/<id>', methods=['GET', 'POST'])
 def delete_category(id):
     category = Category.query.get(id)
     db.session.delete(category)
@@ -122,6 +126,10 @@ def add_record():
 
         record = Record(name=request.form['name'], category_id=get_category_id(category_name), photo=None,
                         text=request.form['editordata'], description=description)
+        db.session.add(record)
+        db.session.commit()
+        rec = Record.query.filter_by(name=request.form['name']).first()
+        rec.url = f'/record/{rec.id}'
         db.session.add(record)
         db.session.commit()
         return redirect(url_for('editor.add_record'))

@@ -22,7 +22,7 @@
                 <a href="" class="active"><span class="las la-clipboard-list"></span><span>Меню</span></a>
             </li>
             <li>
-                <a href=""><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
+                <a href="{{url_for('editor.fast_access')}}"><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
             </li>
             <li>
                 <a href="{{url_for('editor.show_partners')}}"><span class="las la-receipt"></span><span>Партнеры</span></a>
@@ -50,7 +50,10 @@
             <div class="bg-light p3">
                 <h2>Управление <b>Меню</b>
                     <button type="button" class="btn btn-success float-end"
-                            data-bs-toggle="modal" data-bs-target="#create_modal">Добавить элемент меню
+                            data-bs-toggle="modal" data-bs-target="#create_modal">Добавить меню-родителя
+                    </button>
+                    <button type="button" class="btn btn-success float-end"
+                            data-bs-toggle="modal" data-bs-target="#create_modal_link">Добавить ссылку
                     </button>
                     <a href="{{url_for('editor.drag_drop_menu')}}" class="btn btn-warning btn-xs">Изменить
                         расположение</a>
@@ -103,7 +106,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Изменить название категории</h4>
+                                    <h4 class="modal-title">Изменить свойства элемента меню:</h4>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
@@ -114,6 +117,11 @@
                                             <input type="hidden" name="id" value="{{ row.id }}">
                                             <input type="text" class="form-control" name="name" required="1"
                                                    value="{{ row.name }}">
+                                            {% if row.is_parent == False%}
+                                            <label>Url:</label>
+                                            <input type="text" class="form-control" name="url" required="1"
+                                                   value="{{ row.url }}">
+                                            {% endif %}
                                         </div>
 
                                         <div class="form-group">
@@ -134,7 +142,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Add Employee</h4>
+                                <h4 class="modal-title">Добавить меню-родителся</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -146,13 +154,43 @@
                                         <input type="text" class="form-control" name="name" required="1">
                                     </div>
 
+
+
+
                                     <div class="form-group">
-                                        <label>Родитель?</label>
-                                        <input type="checkbox" name="parent">
+                                        <button class="btn btn-primary" type="submit">Добавить</button>
                                     </div>
+
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="create_modal_link" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Добавить ссылку:</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ url_for('editor.insert_menu_link') }}" method="post">
                                     <div class="form-group">
-                                        <label>Адрес внутренний?</label>
-                                        <input type="checkbox" name="inner">
+                                        <label>Название:</label>
+
+                                        <input type="text" class="form-control" name="name" required="1">
+                                    </div>
+
+
+                                    <div class="form-group">
+
+                                            <label class="big-text">Адрес внутренний?</label>
+                                            <input type="checkbox" name="inner">
                                     </div>
 
                                     <div class="form-group">
