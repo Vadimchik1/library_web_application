@@ -1,0 +1,72 @@
+{% extends 'base_public.html' %}
+{% block hnavbar %}
+<nav  class="topnav">
+
+    <ul class="menu">
+        {% for el in menu.keys() %}
+        <li><a href="{%if el.is_parent%}
+        {% else %}
+        {{el.url}}
+        {%endif%}">{{el.name}}</a>
+        <ul class="submenu">
+            {%for elem in menu[el]%}
+            {% if elem.is_parent == True %}
+            <li><a href="{{elem.url}}">{{elem.name}}</a></li>
+            {% else %}
+            <li class="parent"><a href="{{elem.url}}">{{elem.name}}</a></li>
+            {% endif %}
+            {%endfor%}
+        </ul>
+        </li>
+        {% endfor %}
+
+
+    </ul>
+
+    </nav>
+{% endblock %}
+{% block content %}
+{% for record in pages.items %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            <div>{{ record.name }}</div>
+            {%if record.normal_date == None%}
+            <div class="news-block-date">{{ record.created_at }}</div>
+
+            {%else%}
+            <div class="news-block-date">{{ record.normal_date }}</div>
+            {%endif%}
+        </h3>
+    </div>
+    <div class="panel-body" style="padding:0;">
+        <div class="news_short_block">
+            <div class="news_preview"><a class="fancybox preview" href=""
+                                         data-fancybox-group="677f2709938efbcd0706ca2ce31bbd55">
+                <div
+                        style="width:130px;height:130px;display:inline-block;background:url('{{url_for('public.record_img', id=record.id)}}') no-repeat center center;background-size:contain;">
+                </div>
+            </a></div>
+            <div class="news_short_body">
+                {{ record.description }}
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><a class="btn btn-sm btn-primary" href="{{url_for('public.show_record', id=record.id)}}">Читать далее</a></div>
+</div>
+{% endfor %}
+
+<div class="paginate wrapper"><!-- The "wrapper" is just a comestic addition. You don't need this for the pagination to work. -->
+        <ul>
+            <li><a href="./?page={{ pages.prev_num }}">&lang;</a></li>
+
+            {%for page in pages.iter_pages() %}
+            {% if page == pages.page %}
+                <li><a href="./?page={{page}}" class="active">{{page}}</a></li>
+            {% else %}
+                <li><a href="./?page={{page}}">{{page}}</a></li>            {% endif %}
+            {%endfor%}
+            <li><a href="./?page={{ pages.next_num }}">&rang;</a></li>
+        </ul>
+    </div>
+{% endblock %}
