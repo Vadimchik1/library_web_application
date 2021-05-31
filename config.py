@@ -17,3 +17,4 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_SSL = False
     MAIL_USE_TLS = True
+    POSTS_PER_PAGE = 10

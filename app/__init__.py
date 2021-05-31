@@ -1,5 +1,5 @@
-from flask import Flask, request, session, current_app
-from flask_user import SQLAlchemyAdapter, UserManager
+from flask import Flask, request, current_app
+from flask_user import UserManager
 from app.admin_bp import blueprint as admin_bp
 from app.public_bp import blueprint as public_bp
 from app.editor_bp import blueprint as edit_bp
@@ -7,17 +7,19 @@ from app.errors import blueprint as errors_bp
 from config import Config
 from app.models import *
 from app.extensions import migrate, babel
-from flask_script import Manager
 
 
 @babel.localeselector
 def get_locale():
-    if request.args.get('lang'):
-        session['lang'] = request.args.get('lang')
-    elif not session.get('lang'):
-        session['lang'] = request.accept_languages.best_match(current_app.config['LANGUAGES'])
-
-    return session.get('lang', 'ru')
+    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+# @babel.localeselector
+# def get_locale():
+#     if request.args.get('lang'):
+#         session['lang'] = request.args.get('lang')
+#     elif not session.get('lang'):
+#         session['lang'] = request.accept_languages.best_match(current_app.config['LANGUAGES'])
+#
+#     return session.get('lang', 'ru')
 
 
 def create_usermanager(app, db, User):

@@ -94,6 +94,12 @@ def drag_drop_menu():
     return render_template('editor_bp/drag_drop_menu.html', dragdrop=drag_drop, title='Изменение меню')
 
 
+@blueprint.route('/submenu/<id>/change-location/')
+def drag_drop_submenu(id):
+    drag_drop = db.session.query(SubMenu).filter_by(menu_parent_id=id).order_by(SubMenu.index).all()
+    return render_template('editor_bp/drag_drop_submenu.html', dragdrop=drag_drop, title='Изменение подменю')
+
+
 @blueprint.route('/menu/change-location/updateList', methods=["POST"])
 def update_menu_location():
     if request.method == 'POST':

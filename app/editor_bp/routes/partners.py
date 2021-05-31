@@ -2,7 +2,6 @@ from flask import render_template, request, redirect, url_for, flash, jsonify
 from pathlib import Path
 from app.editor_bp import blueprint
 from app.models import Partners, db
-from PIL import Image
 
 files_suffixes = ['.jpg', '.png']
 @blueprint.route('/partners')

@@ -1,5 +1,5 @@
 {% extends 'base_template.html' %}
-{% include 'header.html' %}
+{% include 'admin_header.html' %}
 {% block title %} Home {% endblock %}
 
 
@@ -8,9 +8,9 @@
     <div class="row">
         <div class="col md-12">
             <div class="bg-light p3">
-                <h2>Manage <b>Employess</b>
+                <h2>Управление <b>персоналом</b>
                     <button type="button" class="btn btn-success float-end"
-                            data-bs-toggle="modal" data-bs-target="#create_modal">Add new employee
+                            data-bs-toggle="modal" data-bs-target="#create_modal">Добавить
                     </button>
                 </h2>
 
@@ -35,8 +35,8 @@
 
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Action</th>
+                        <th>Имя</th>
+                        <th>Действия</th>
                     </tr>
                     {% for row in employees %}
                     <tr>
@@ -44,33 +44,33 @@
                         <td>{{ row.username }}</td>
                         <td>
                             <a href="admin/update/{{row.id}}" class="btn btn-warning btn-xs" data-bs-toggle="modal"
-                               data-bs-target="#edit_modal{{ row.id }}">Edit</a>
+                               data-bs-target="#edit_modal{{ row.id }}">Редактировать</a>
                             <a href="/admin/delete/{{row.id}}" class="btn btn-danger btn-xs"
-                               onclick="return confirm('Are you sure to delete ?')">Delete</a>
+                               onclick="return confirm('Вы уверены, что хотите удалить ?')">Удалить</a>
                         </td>
                     </tr>
                     <div id="edit_modal{{ row.id }}" class="modal fade" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Edit Employee Information</h4>
+                                    <h4 class="modal-title">Изменить информацию о работнике</h4>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form action="{{ url_for('admin.update_user') }}" method="post">
                                         <div class="form-group">
-                                            <label>Name:</label>
+                                            <label>Имя:</label>
                                             <input type="hidden" name="id" value="{{ row.id }}">
                                             <input type="text" class="form-control" name="name" required="1"
                                                    value="{{ row.username }}">
                                         </div>
                                         <div class="form-group">
-                                            <label>Password:</label>
+                                            <label>Пароль:</label>
                                             <input type="password" class="form-control" name="password" required="1">
                                         </div>
                                         <div class="form-group">
-                                            <button class="btn btn-primary" type="submit">Edit employee</button>
+                                            <button class="btn btn-primary" type="submit">Изменить</button>
                                         </div>
                                     </form>
                                 </div>
@@ -87,28 +87,28 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Add Employee</h4>
+                                <h4 class="modal-title">Добавить редактора</h4>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form action="{{ url_for('admin.insert_user') }}" method="post">
                                     <div class="form-group">
-                                        <label>Name:</label>
+                                        <label>Имя:</label>
 
                                         <input type="text" class="form-control" name="name" required="1">
                                     </div>
                                     <div class="form-group">
-                                        <label>Password:</label>
+                                        <label>Пароль:</label>
                                         <input type="password" class="form-control" name="password" required="1">
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">Add employee</button>
+                                        <button class="btn btn-primary" type="submit">Добавить</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"> Закрыть</button>
                             </div>
                         </div>
                     </div>

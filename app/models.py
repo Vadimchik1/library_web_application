@@ -41,6 +41,7 @@ class Record(db.Model):
     created_at = Column(DateTime(), default=datetime.utcnow())
     normal_date = Column(Date(), default=datetime.utcnow())
     url = Column(String(250))
+    image = Column(BLOB)
 
 
 

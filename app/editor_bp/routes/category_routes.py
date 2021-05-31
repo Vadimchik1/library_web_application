@@ -1,9 +1,10 @@
-from flask import render_template, current_app, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request
 from app.editor_bp import blueprint
-from ..forms import AddCategoryForm, AddRecordForm
+from ..forms import  AddRecordForm
 from app.models import db, Category, Record
 from datetime import datetime
-from sqlalchemy.exc import IntegrityError, InvalidRequestError
+from pathlib import Path
+from .partners import files_suffixes
 
 
 def get_category_id(name):
@@ -112,9 +113,7 @@ def add_record():
     categories = Category.query.all()
     title = 'Новая запись'
     if request.method == 'POST':
-        print(request.form)
         description = (request.form['description'])
-        print(description)
         category_name = request.form['category']
         exist_names = []
         for record in Record.query.all():
@@ -123,8 +122,12 @@ def add_record():
             flash('Такое название уже существует, пожалуйста введите другое!')
             return redirect(url_for('editor.add_record'))
         valid_record_data(request)
+        if Path(request.files['file'].filename).suffix not in files_suffixes:
+            flash('Расширение файла не "jpg" или не был отправлен файл.')
+            return redirect(url_for('editor.add_partner'))
+        image = request.files['file'].read()
 
-        record = Record(name=request.form['name'], category_id=get_category_id(category_name), photo=None,
+        record = Record(name=request.form['name'], category_id=get_category_id(category_name), photo=image,
                         text=request.form['editordata'], description=description)
         db.session.add(record)
         db.session.commit()
