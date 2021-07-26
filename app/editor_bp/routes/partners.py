@@ -2,16 +2,22 @@ from flask import render_template, request, redirect, url_for, flash, jsonify
 from pathlib import Path
 from app.editor_bp import blueprint
 from app.models import Partners, db
-
+from flask_user import roles_required
+from loguru import logger
 files_suffixes = ['.jpg', '.png']
+
+
 @blueprint.route('/partners')
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def show_partners():
     partners = Partners.query.all()
-    print(partners)
     return render_template('editor_bp/partners.html', partners=partners, title='Партнеры')
 
 
 @blueprint.route('/add_partner', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def add_partner():
     if request.method == 'POST':
         name = request.form['name']
@@ -34,7 +40,10 @@ def add_partner():
         return redirect(url_for('editor.show_partners'))
     return render_template('editor_bp/add_partner.html', title='Добавить партнера')
 
+
 @blueprint.route('/delete_partner/<id>', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def delete_partner(id):
     partner = Partners.query.get(id)
     db.session.delete(partner)

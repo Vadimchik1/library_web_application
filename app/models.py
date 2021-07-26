@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from app.extensions import db
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, BLOB, TEXT, PickleType, Date
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, TEXT, PickleType, Date, BLOB, LargeBinary
 from flask_user import UserMixin
 from datetime import datetime
 
@@ -32,18 +32,22 @@ class UserRoles(db.Model):
 
 class Record(db.Model):
     __tablename__ = 'records'
+    __searchable__ = ['text']
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False, unique=True)
-    photo = Column(BLOB)
+    name_en = Column(String(250))
+    name_kz = Column(String(250))
+    photo = Column(LargeBinary)
     description = Column(TEXT)
+    description_en = Column(TEXT)
+    description_kz = Column(TEXT)
     text = Column(TEXT)
+    text_en = Column(TEXT)
+    text_kz = Column(TEXT)
     category_id = Column(Integer(), db.ForeignKey('categories.id'))
     created_at = Column(DateTime(), default=datetime.utcnow())
     normal_date = Column(Date(), default=datetime.utcnow())
     url = Column(String(250))
-    image = Column(BLOB)
-
-
 
 
 class Category(db.Model):  #
@@ -53,11 +57,12 @@ class Category(db.Model):  #
     url = Column(String(250))
 
 
-
 class SubMenu(db.Model):
     __tablename__ = 'submenu'
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False)
+    name_en = Column(String(250))
+    name_kz = Column(String(250))
     url = Column(String(250), nullable=True)
     url_is_inner = Column(Boolean(), default=True)
     index = Column(Integer, default=None)
@@ -68,6 +73,9 @@ class Menu(db.Model):
     __tablename__ = 'menu'
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False)
+    name_en = Column(String(250))
+    name_kz = Column(String(250))
+
     url = Column(String(250), nullable=True)
     url_is_inner = Column(Boolean, default=True)
     is_parent = Column(Boolean, default=True)
@@ -79,6 +87,8 @@ class FastAccess(db.Model):
     __tablename__ = 'fast_access'
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False)
+    name_en = Column(String(250))
+    name_kz = Column(String(250))
     url = Column(String(250), nullable=True)
     url_is_inner = Column(Boolean, default=True)
     index = Column(Integer, default=None)
@@ -95,4 +105,13 @@ class Partners(db.Model):
     id = Column(Integer(), primary_key=True)
     name = Column(String(250), nullable=False)
     url = Column(String(250), nullable=False)
-    image = Column(BLOB, nullable=False)
+    image = Column(LargeBinary, nullable=False)
+
+
+class Questions(db.Model):
+    __tablename__ = 'questions'
+    id = Column(Integer(), primary_key=True)
+    theme = Column(String(300))
+    email = Column(String(255))
+    text = Column(TEXT)
+    created_at = Column(DateTime(), default=datetime.utcnow())

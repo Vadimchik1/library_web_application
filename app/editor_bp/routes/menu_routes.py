@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, url_for, flash, jsonify
 from app.editor_bp import blueprint
 from app.models import Menu, db, SubMenu
-
+from flask_user import roles_required
+from loguru import logger
 
 def get_inner_url(url):
     if len(url.split('/')) == 3:
@@ -11,6 +12,8 @@ def get_inner_url(url):
 
 
 @blueprint.route('/menu/')
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def menu():
     title = 'Меню'
     menu_list = Menu.query.all()
@@ -19,6 +22,8 @@ def menu():
 
 
 @blueprint.route('/insert_menu_parent', methods=['POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def insert_menu_parent():
     if request.method == 'POST':
         name = request.form['name']
@@ -32,6 +37,8 @@ def insert_menu_parent():
 
 
 @blueprint.route('/insert_menu_link', methods=['POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def insert_menu_link():
     if request.method == 'POST':
         name = request.form['name']
@@ -41,7 +48,7 @@ def insert_menu_link():
         else:
             is_inner = False
         if is_inner:
-            url = get_inner_url(request.form['url'])
+            url = '/' + get_inner_url(request.form['url'])
         else:
             url = request.form['url']
         print(request.form['url'])
@@ -54,10 +61,14 @@ def insert_menu_link():
 
 
 @blueprint.route('/update-menu_parent', methods=['POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def update_menu_parent():
     if request.method == 'POST':
         menu_el = Menu.query.get(request.form.get('id'))
         menu_el.name = request.form['name']
+        menu_el.name_en = request.form['name_en']
+        menu_el.name_kz = request.form['name_kz']
         if menu_el.is_parent == False:
             menu_el.url = request.form['url']
         db.session.add(menu_el)
@@ -67,6 +78,8 @@ def update_menu_parent():
 
 
 @blueprint.route('/delete_menu_parent/<id>', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def delete_menu_parent(id):
     menu_el = Menu.query.get(id)
     index_del_el = menu_el.index
@@ -87,6 +100,8 @@ def delete_menu_parent(id):
 
 
 @blueprint.route('/menu/change-location/')
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def drag_drop_menu():
     # dragdrop = Menu.query.all()
     drag_drop = db.session.query(Menu).order_by(Menu.index).all()
@@ -95,12 +110,16 @@ def drag_drop_menu():
 
 
 @blueprint.route('/submenu/<id>/change-location/')
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def drag_drop_submenu(id):
     drag_drop = db.session.query(SubMenu).filter_by(menu_parent_id=id).order_by(SubMenu.index).all()
     return render_template('editor_bp/drag_drop_submenu.html', dragdrop=drag_drop, title='Изменение подменю')
 
 
 @blueprint.route('/menu/change-location/updateList', methods=["POST"])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def update_menu_location():
     if request.method == 'POST':
         order = request.form['order'].split(',')
@@ -115,6 +134,8 @@ def update_menu_location():
 
 
 @blueprint.route('/submenu/change-location/updateList', methods=["POST"])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def update_submenu_location():
     if request.method == 'POST':
         order = request.form['order'].split(',')
@@ -129,6 +150,8 @@ def update_submenu_location():
 
 
 @blueprint.route('/show_menu_element/<id>', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def show_menu_element(id):
     menu_el_children = SubMenu.query.filter_by(menu_parent_id=id).all()
     menu_name = Menu.query.filter_by(id=id).first().name
@@ -137,6 +160,8 @@ def show_menu_element(id):
 
 
 @blueprint.route('/insert_submenu/<id>', methods=['POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def insert_submenu(id):
     if request.method == 'POST':
         name = request.form['name']
@@ -147,7 +172,7 @@ def insert_submenu(id):
             is_inner = False
 
         if is_inner:
-            url = get_inner_url(request.form['url'])
+            url = '/' + get_inner_url(request.form['url'])
         else:
             url = request.form['url']
         menu_el = SubMenu(name=name, url_is_inner=is_inner, url=url, menu_parent_id=id, index=index_el)
@@ -160,11 +185,15 @@ def insert_submenu(id):
 # Надо писать здесь создание вставка подменю элемента
 
 @blueprint.route('/update_submenu/', methods=['POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def update_submenu():
     if request.method == 'POST':
         print(request)
         submenu_el = SubMenu.query.get(request.form.get('id'))
         submenu_el.name = request.form['name']
+        submenu_el.name_en = request.form['name_en']
+        submenu_el.name_kz = request.form['name_kz']
         submenu_el.url = request.form['url']
         db.session.add(submenu_el)
         db.session.commit()
@@ -173,6 +202,8 @@ def update_submenu():
 
 
 @blueprint.route('/delete_submenu/<id>', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def delete_submenu(id):
     submenu_el = SubMenu.query.get(id)
     index_del_el = submenu_el.index

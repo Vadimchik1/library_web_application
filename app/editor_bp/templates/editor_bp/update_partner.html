@@ -17,7 +17,11 @@
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a href="" class="active"><span class="las la-igloo"></span><span>Записи</span></a>
+                <a href="{{url_for('editor.add_record')}}"><span
+                        class="las la-igloo"></span><span>Новая запись</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.find_edit_record')}}"><span class="las la-igloo"></span><span>Редактировать запись</span></a>
             </li>
             <li>
                 <a href="{{url_for('editor.show_categories')}}"><span class="las la-users"></span><span>Категории</span></a>
@@ -32,7 +36,7 @@
                 <a href="{{url_for('editor.show_partners')}}"><span class="las la-receipt"></span><span>Партнеры</span></a>
             </li>
             <li>
-                <a href=""><span class="las la-user-circle"></span><span>Правая панель</span></a>
+                <a href=""><span class="las la-user-circle"></span><span>Виртуальная справочная служба</span></a>
             </li>
             <li>
                 <a href=""><span class="las la-clipboard-list"></span><span>Метрики</span></a>
@@ -68,15 +72,17 @@
         <!--            <span class="required_notification">* Denotes Required Field</span>-->
     </li>
     <li>
-        <label>Название:</label> <input type="text" name="name" placeholder="Введите название записи..." value="{{ partner.name}}">
+        <label>Название:</label> <input type="text" name="name" placeholder="Введите название записи..."
+                                        value="{{ partner.name}}">
     </li>
 
     <li>
-        <label>Url-адрес:</label> <input type="text" name="url_address" placeholder="Введите url адрес..." value="{{ partner.url }}">
+        <label>Url-адрес:</label> <input type="text" name="url_address" placeholder="Введите url адрес..."
+                                         value="{{ partner.url }}">
     </li>
     <li>
         <label for="file" class="col-sm-2 control-label">Картинка:</label>
-        <input type="file"  name="file" id="file">
+        <input type="file" name="file" id="file">
     </li>
 
     <li>

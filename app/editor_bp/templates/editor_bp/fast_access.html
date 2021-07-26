@@ -13,7 +13,10 @@
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a href="{{url_for('editor.add_record')}}"><span class="las la-igloo"></span><span>Записи</span></a>
+                <a href="{{url_for('editor.add_record')}}"><span class="las la-igloo"></span><span>Новая запись</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.find_edit_record')}}" ><span class="las la-igloo"></span><span>Редактировать запись</span></a>
             </li>
             <li>
                 <a href="{{url_for('editor.show_categories')}}"><span class="las la-users"></span><span>Категории</span></a>
@@ -28,7 +31,7 @@
                 <a href="{{url_for('editor.show_partners')}}"><span class="las la-receipt"></span><span>Партнеры</span></a>
             </li>
             <li>
-                <a href=""><span class="las la-user-circle"></span><span>Правая панель</span></a>
+                <a href="{{url_for('editor.questions')}}"><span class="las la-user-circle"></span><span>Виртуальная справочная служба</span></a>
             </li>
             <li>
                 <a href=""><span class="las la-clipboard-list"></span><span>Метрики</span></a>
@@ -111,6 +114,12 @@
                                             <input type="hidden" name="id" value="{{ row.id }}">
                                             <input type="text" class="form-control" name="name" required="1"
                                                    value="{{ row.name }}">
+                                            <label>Название на английском:</label>
+                                            <input type="text" class="form-control" name="name_en" required="1"
+                                                   value="{{ row.name_en }}">
+                                            <label>Название на казахском:</label>
+                                            <input type="text" class="form-control" name="name_kz" required="1"
+                                                   value="{{ row.name_kz }}">
                                             <label>Url:</label>
                                             <input type="text" class="form-control" name="url" required="1"
                                                    value="{{ row.url }}">

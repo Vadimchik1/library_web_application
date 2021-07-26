@@ -1,10 +1,13 @@
 from flask import render_template, redirect, url_for, flash, request
 from app.editor_bp import blueprint
-from ..forms import  AddRecordForm
+from flask.debughelpers import DebugFilesKeyError
+from ..forms import AddRecordForm
 from app.models import db, Category, Record
 from datetime import datetime
 from pathlib import Path
 from .partners import files_suffixes
+from flask_user import roles_required
+from loguru import logger
 
 
 def get_category_id(name):
@@ -26,18 +29,11 @@ def valid_record_data(req):
         return redirect(url_for('editor.add_record'))
 
 
-# @blueprint.route('/add-category', methods=['GET', 'POST'])
-# def add_category():
-#     form = AddCategoryForm()
-#     if form.validate_on_submit():
-#         category = Category(name=form.name.data)
-#         db.session.add(category)
-#         db.session.commit()
-#         return redirect(url_for('editor.add_category'))
-#     return render_template('editor_bp/add_category.html', form=form)
 
 
 @blueprint.route('/categories/', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def show_categories():
     title = 'Категории'
     categories = Category.query.all()
@@ -45,6 +41,8 @@ def show_categories():
 
 
 @blueprint.route('/insert-category', methods=['POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def insert_category():
     if request.method == 'POST':
         name = request.form['name']
@@ -60,6 +58,8 @@ def insert_category():
 
 
 @blueprint.route('/update-category', methods=['POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def update_category():
     if request.method == 'POST':
         category = Category.query.get(request.form.get('id'))
@@ -71,6 +71,8 @@ def update_category():
 
 
 @blueprint.route('/delete-category/<id>', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def delete_category(id):
     category = Category.query.get(id)
     db.session.delete(category)
@@ -80,6 +82,8 @@ def delete_category(id):
 
 
 @blueprint.route('/categories/<id>', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def category(id):
     records = Record.query.filter_by(category_id=id).all()
     category_name = Category.query.filter_by(id=id).first().name
@@ -88,18 +92,37 @@ def category(id):
 
 
 @blueprint.route('record/<id>', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def record(id):
     # edit_record | show_record in admin panel
     record_item = Record.query.filter_by(id=id).first()
+    if record_item is None:
+        flash('Вы ввели несуществующий id.')
+        return redirect(url_for('editor.find_edit_record'))
     try:
         title = record_item.name
     except:
         title = ''
     if request.method == 'POST':
         record_item.name = request.form['name']
+        record_item.name_en = request.form['name_en']
+        record_item.name_kz = request.form['name_kz']
         record_item.description = request.form['description']
+        record_item.description_en = request.form['description_en']
+        record_item.description_kz = request.form['description_kz']
+
         record_item.text = request.form['editordata']
-        record_item.photo = None
+        record_item.text_en = request.form['editordata_en']
+        record_item.text_kz = request.form['editordata_kz']
+        try:
+            image = request.files['file'].read()
+            if Path(request.files['file'].filename).suffix not in files_suffixes:
+                flash('Расширение файла не "jpg"')
+                return redirect(url_for('editor.add_record'))
+            record_item.photo = image
+        except DebugFilesKeyError:
+            pass
         record_item.created_at = datetime.utcnow()
         db.session.add(record_item)
         db.session.commit()
@@ -108,6 +131,8 @@ def record(id):
 
 
 @blueprint.route('/add-record', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def add_record():
     form = AddRecordForm()
     categories = Category.query.all()
@@ -124,9 +149,8 @@ def add_record():
         valid_record_data(request)
         if Path(request.files['file'].filename).suffix not in files_suffixes:
             flash('Расширение файла не "jpg" или не был отправлен файл.')
-            return redirect(url_for('editor.add_partner'))
+            return redirect(url_for('editor.add_record'))
         image = request.files['file'].read()
-
         record = Record(name=request.form['name'], category_id=get_category_id(category_name), photo=image,
                         text=request.form['editordata'], description=description)
         db.session.add(record)
@@ -140,6 +164,8 @@ def add_record():
 
 
 @blueprint.route('/delete-record/<id>/', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
 def delete_record(id):
     record = Record.query.get(id)
     id_r = record.category_id
@@ -147,3 +173,17 @@ def delete_record(id):
     db.session.commit()
     flash("Запись была успешно удалена")
     return redirect(url_for('editor.category', id=id_r))
+
+
+@blueprint.route('/find-edit-record/', methods=['GET', 'POST'])
+@roles_required(['editor', 'admin'])
+@logger.catch()
+def find_edit_record():
+    title = 'Поиск записи'
+    if request.method == 'POST':
+        data = request.form['record_id']
+        if data.isdigit() == False:
+            flash('Пожалуйста введите в это поле цифру!')
+            return redirect(url_for('editor.find_edit_record'))
+        return redirect(url_for('editor.record', id=int(request.form['record_id'])))
+    return render_template('editor_bp/find_edit_record.html', title=title)

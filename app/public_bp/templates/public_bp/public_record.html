@@ -1,10 +1,11 @@
 {% extends 'base_public.html' %}
+{% block title%} {{record.name}}{%endblock %}
 {% block head %}
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 {% endblock %}
 {% block hnavbar %}
@@ -15,11 +16,11 @@
         {% else %}
         {{el.url}}
         {%endif%}">{{el.name}}</a>
-        <ul class="submenu">
-            {%for elem in menu[el]%}
-            <li><a href="{{elem.url}}">{{elem.name}}</a></li>
-            {%endfor%}
-        </ul>
+            <ul class="submenu">
+                {%for elem in menu[el]%}
+                <li><a href="{{elem.url}}">{{elem.name}}</a></li>
+                {%endfor%}
+            </ul>
         </li>
         {% endfor %}
     </ul>
@@ -31,11 +32,20 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
-            <div>{{ record.name }}</div>
+            <div>
+                {% if locale == 'en'%}
+                {{ record.name_en }}
+                {% elif locale == 'es'%}
+                {{ record.name_kz }}
+                {% else %}
+                {{ record.name }}
+                {% endif %}
+
+            </div>
             <div class="news-block-date">
                 <div>
-                {{ record.created_at }}
-                    </div>
+                    {{ record.normal_date }}
+                </div>
             </div>
         </h3>
     </div>
@@ -43,8 +53,15 @@
 
         <div class="news_short_block">
             <div>
-            {{record.text|safe}}
-                </div>
+                {% if locale == 'en'%}
+                {{record.text_en|safe}}
+                {% elif locale == 'es'%}
+                {{record.text_kz|safe}}
+                {% else %}
+                {{record.text|safe}}
+                {% endif %}
+
+            </div>
         </div>
 
     </div>

@@ -2,11 +2,13 @@ from flask import render_template, request, current_app, redirect, url_for, flas
 from app.admin_bp import blueprint
 from app.models import db, Role, User
 from flask_user import PasswordManager, roles_required
+from loguru import logger
 
 
 @blueprint.route('/', methods=['GET', 'POST'])
 @blueprint.route('/index')
 @roles_required('admin')
+@logger.catch()
 def index():
     employees = User.query.all()
     return render_template('index.html', employees=employees)
@@ -14,6 +16,7 @@ def index():
 
 @blueprint.route('/insert', methods=['GET', 'POST'])
 @roles_required('admin')
+@logger.catch()
 def insert_user():
     if request.method == 'POST':
         username = request.form['name']
@@ -30,6 +33,7 @@ def insert_user():
 
 @blueprint.route('/update', methods=['GET', 'POST'])
 @roles_required('admin')
+@logger.catch()
 def update_user():
     if request.method == 'POST':
         user = User.query.get(request.form.get('id'))
@@ -45,6 +49,7 @@ def update_user():
 
 @blueprint.route('/delete/<id>/', methods=['GET', 'POST'])
 @roles_required('admin')
+@logger.catch()
 def delete_user(id):
     user = User.query.get(id)
     db.session.delete(user)
