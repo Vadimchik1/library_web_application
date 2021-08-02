@@ -1,3 +1,4 @@
+# Translations template for PROJECT.
 # Copyright (C) 2021 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
@@ -7,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-07-18 19:39+0600\n"
+"POT-Creation-Date: 2021-08-01 20:32+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,37 +17,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-#: app/public_bp/routes/core.py:10
+#: app/public_bp/routes/core.py:20
 msgid "Главная"
 msgstr ""
 
-#: app/templates/base_public.html:29 app/templates/base_public.html:120
+#: app/public_bp/routes/core.py:164 app/templates/base_public.html:99
+msgid "Виртуальная справочная служба"
+msgstr ""
+
+#: app/public_bp/routes/core.py:195 app/templates/base_public.html:124
+msgid "Записаться в библиотеку"
+msgstr ""
+
+#: app/public_bp/routes/core.py:240 app/templates/base_public.html:150
+msgid "Новые поступления"
+msgstr ""
+
+#: app/public_bp/templates/public_bp/public_arrival.html:67
+msgid "Аннотация:"
+msgstr ""
+
+#: app/public_bp/templates/public_bp/public_category.html:100
+#: app/public_bp/templates/public_bp/public_new_arrivals.html:100
+#: app/public_bp/templates/public_bp/search.html:98
+msgid "Читать далее"
+msgstr ""
+
+#: app/templates/base_public.html:30 app/templates/base_public.html:169
 msgid "Карагандинский технический университет"
 msgstr ""
 
-#: app/templates/base_public.html:30
+#: app/templates/base_public.html:31
 msgid "Библиотека"
 msgstr ""
 
-#: app/templates/base_public.html:52
+#: app/templates/base_public.html:53
 msgid "Версия для слабовидящих"
 msgstr ""
 
-#: app/templates/base_public.html:56
+#: app/templates/base_public.html:57
 msgid "Поиск"
 msgstr ""
 
-#: app/templates/base_public.html:69
+#: app/templates/base_public.html:70
 msgid "Быстрый доступ"
 msgstr ""
 
-#: app/templates/base_public.html:97
+#: app/templates/base_public.html:106
 msgid "Часы работы"
 msgstr ""
 
-#: app/templates/base_public.html:101
-msgid ""
-"понедельник-пятница - с 10.00 до 19.00 суббота - с 10.00 до 17.00 "
-"воскресенье - выходной "
+#: app/templates/base_public.html:131
+msgid "Контакты"
 msgstr ""
 
