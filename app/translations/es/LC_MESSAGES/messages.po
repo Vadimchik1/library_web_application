@@ -54,7 +54,7 @@ msgstr "Кітапхана"
 
 #: app/templates/base_public.html:53
 msgid "Версия для слабовидящих"
-msgstr "Көзі нашар көретіндерге арналған нұсқа "
+msgstr "Көзі нашар көретіндерге "
 
 #: app/templates/base_public.html:57
 msgid "Поиск"
