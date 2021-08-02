@@ -20,55 +20,55 @@ msgstr ""
 
 #: app/public_bp/routes/core.py:20
 msgid "Главная"
-msgstr ""
+msgstr "Басты бет"
 
 #: app/public_bp/routes/core.py:164 app/templates/base_public.html:99
 msgid "Виртуальная справочная служба"
-msgstr ""
+msgstr "Виртуалды анықтама қызметі "
 
 #: app/public_bp/routes/core.py:195 app/templates/base_public.html:124
 msgid "Записаться в библиотеку"
-msgstr ""
+msgstr "Кітапханаға жазылыңыз "
 
 #: app/public_bp/routes/core.py:240 app/templates/base_public.html:150
 msgid "Новые поступления"
-msgstr ""
+msgstr "Жаңадан келгендер "
 
 #: app/public_bp/templates/public_bp/public_arrival.html:67
 msgid "Аннотация:"
-msgstr ""
+msgstr "Аннотация"
 
 #: app/public_bp/templates/public_bp/public_category.html:100
 #: app/public_bp/templates/public_bp/public_new_arrivals.html:100
 #: app/public_bp/templates/public_bp/search.html:98
 msgid "Читать далее"
-msgstr ""
+msgstr "Ары қарай оқу "
 
 #: app/templates/base_public.html:30 app/templates/base_public.html:169
 msgid "Карагандинский технический университет"
-msgstr ""
+msgstr "Қарағанды техникалық университеті "
 
 #: app/templates/base_public.html:31
 msgid "Библиотека"
-msgstr ""
+msgstr "Кітапхана"
 
 #: app/templates/base_public.html:53
 msgid "Версия для слабовидящих"
-msgstr ""
+msgstr "Көзі нашар көретіндерге арналған нұсқа "
 
 #: app/templates/base_public.html:57
 msgid "Поиск"
-msgstr ""
+msgstr "Іздеу"
 
 #: app/templates/base_public.html:70
 msgid "Быстрый доступ"
-msgstr ""
+msgstr "Жылдам қол жеткізу "
 
 #: app/templates/base_public.html:106
 msgid "Часы работы"
-msgstr ""
+msgstr "Жұмыс уақыты "
 
 #: app/templates/base_public.html:131
 msgid "Контакты"
-msgstr ""
+msgstr "Байланыстар"
 

@@ -115,12 +115,16 @@ def record(id):
         record_item.text = request.form['editordata']
         record_item.text_en = request.form['editordata_en']
         record_item.text_kz = request.form['editordata_kz']
+
         try:
             image = request.files['file'].read()
-            if Path(request.files['file'].filename).suffix not in files_suffixes:
-                flash('Расширение файла не "jpg"')
-                return redirect(url_for('editor.add_record'))
-            record_item.photo = image
+            if str(image) == "b''":
+                pass
+            else:
+                if Path(request.files['file'].filename).suffix not in files_suffixes:
+                    flash('Расширение файла не "jpg"')
+                    return redirect(url_for('editor.change_arrival', id=id))
+                record_item.image = image
         except DebugFilesKeyError:
             pass
         record_item.created_at = datetime.utcnow()

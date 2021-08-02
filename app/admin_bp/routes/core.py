@@ -27,7 +27,7 @@ def insert_user():
         user.roles = [Role.query.filter_by(name='editor').first()]
         db.session.add(user)
         db.session.commit()
-        flash('Employee inserted successfully')
+        flash('Сотрудник был успешно добавлен')
         return redirect(url_for('admin.index'))
 
 
@@ -43,7 +43,7 @@ def update_user():
         user.roles = [Role.query.filter_by(name='editor').first()]
         db.session.add(user)
         db.session.commit()
-        flash("Employee was changed successfully")
+        flash("Информация о сотруднике была успешно изменена")
         return redirect(url_for('admin.index'))
 
 
@@ -54,5 +54,5 @@ def delete_user(id):
     user = User.query.get(id)
     db.session.delete(user)
     db.session.commit()
-    flash("Employee deleted successfully")
+    flash("Сотрудник был успешно удален")
     return redirect(url_for('admin.index'))

@@ -7,4 +7,4 @@ blueprint = Blueprint('public', __name__,
                       static_folder='static',
                       static_url_path='/admin/static/')
 
-from app.public_bp.routes import core
+from app.public_bp.routes import *

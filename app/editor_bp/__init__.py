@@ -6,4 +6,4 @@ blueprint = Blueprint('editor', __name__,
                       static_folder='static',
                       static_url_path='/editor_bp/static/')
 
-from app.editor_bp.routes import core
+from app.editor_bp.routes import *

@@ -21,13 +21,13 @@
                 <a href="{{url_for('editor.find_edit_record')}}"><span class="las la-igloo"></span><span>Редактировать запись</span></a>
             </li>
             <li>
-                <a href="{{url_for('editor.fast_access')}}"><span class="las la-users"></span><span>Категории</span></a>
+                <a href="{{url_for('editor.show_categories')}}"><span class="las la-users"></span><span>Категории</span></a>
             </li>
             <li>
                 <a href="{{url_for('editor.menu')}}"><span class="las la-clipboard-list"></span><span>Меню</span></a>
             </li>
             <li>
-                <a href=""><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
+                <a href="{{url_for('editor.fast_access')}}"><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
             </li>
             <li>
                 <a href="{{url_for('editor.show_partners')}}"><span class="las la-receipt"></span><span>Партнеры</span></a>
@@ -35,6 +35,18 @@
             <li>
                 <a href="" class="active"><span
                         class="las la-user-circle"></span><span>Виртуальная справочная служба</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.readers')}}"><span class="las la-user-circle"></span><span>Читатели</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.new_arrivals')}}"><span class="las la-user-circle"></span><span>Новые поступления</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.contacts')}}"><span class="las la-user-circle"></span><span>Контактные данные</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.work_hours')}}"><span class="las la-user-circle"></span><span>Часы работы</span></a>
             </li>
             <li>
                 <a href=""><span class="las la-clipboard-list"></span><span>Метрики</span></a>
@@ -73,7 +85,6 @@
                         <th>ID</th>
                         <th>Тема</th>
                         <th>Email</th>
-                        <th>Текст</th>
                         <th>Действия</th>
                     </tr>
                     {% for question in pages.items %}
@@ -81,9 +92,10 @@
                         <th>{{ question.id }}</th>
                         <th>{{ question.theme }}</th>
                         <th>{{ question.email }}</th>
-                        <th>{{ question.text }}</th>
                         <th>
                             <a href="{{url_for('editor.show_question', id=question.id)}}" class="btn btn-warning btn-xs">Просмотреть</a>
+                            <a href="{{ url_for('editor.delete_question', id=question.id) }}" class="btn btn-danger btn-xs"
+                               onclick="return confirm('Вы хотите удалить? ?')">Удалить</a>
                         </th>
                     </tr>
                     {% endfor%}

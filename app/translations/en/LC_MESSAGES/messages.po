@@ -20,55 +20,55 @@ msgstr ""
 
 #: app/public_bp/routes/core.py:20
 msgid "Главная"
-msgstr ""
+msgstr "Main"
 
 #: app/public_bp/routes/core.py:164 app/templates/base_public.html:99
 msgid "Виртуальная справочная служба"
-msgstr ""
+msgstr "Virtual reference service "
 
 #: app/public_bp/routes/core.py:195 app/templates/base_public.html:124
 msgid "Записаться в библиотеку"
-msgstr ""
+msgstr "Sign up to the library "
 
 #: app/public_bp/routes/core.py:240 app/templates/base_public.html:150
 msgid "Новые поступления"
-msgstr ""
+msgstr "New Arrivals "
 
 #: app/public_bp/templates/public_bp/public_arrival.html:67
 msgid "Аннотация:"
-msgstr ""
+msgstr "Annotation:"
 
 #: app/public_bp/templates/public_bp/public_category.html:100
 #: app/public_bp/templates/public_bp/public_new_arrivals.html:100
 #: app/public_bp/templates/public_bp/search.html:98
 msgid "Читать далее"
-msgstr ""
+msgstr "Read more "
 
 #: app/templates/base_public.html:30 app/templates/base_public.html:169
 msgid "Карагандинский технический университет"
-msgstr ""
+msgstr "Karaganda Technical University "
 
 #: app/templates/base_public.html:31
 msgid "Библиотека"
-msgstr ""
+msgstr "Library"
 
 #: app/templates/base_public.html:53
 msgid "Версия для слабовидящих"
-msgstr ""
+msgstr "Version for the visually impaired "
 
 #: app/templates/base_public.html:57
 msgid "Поиск"
-msgstr ""
+msgstr "Search"
 
 #: app/templates/base_public.html:70
 msgid "Быстрый доступ"
-msgstr ""
+msgstr "Fast access "
 
 #: app/templates/base_public.html:106
 msgid "Часы работы"
-msgstr ""
+msgstr "Opening hours "
 
 #: app/templates/base_public.html:131
 msgid "Контакты"
-msgstr ""
+msgstr "Contacts"
 

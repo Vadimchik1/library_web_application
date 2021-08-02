@@ -1,28 +1,41 @@
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DEV_DB = 'sqlite:///bible.db'
+
+pg_user = str(os.getenv("pg_user"))
+pg_pass = str(os.getenv("pg_pass"))
+pg_db = str(os.getenv("pg_db"))
+pg_host = 'db'
+pg_port = 5432
+
+PROD_DB = f'postgresql://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}'
+
+
 class Config:
     DEBUG = True
     LANGUAGES = ['en', 'ru', 'es']
-    SECRET_KEY = 'supersecret'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///bible.db'
+    SECRET_KEY = str(os.getenv("SECRET_KEY"))
+    SQLALCHEMY_DATABASE_URI = DEV_DB
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     CRSF_ENABLED = True
     USER_APP_NAME = 'Сайт библиотеки'
-    # USER_LOGIN_TEMPLATE = 'login.html'
     USER_ENABLE_REGISTER = False
     USER_ENABLE_CHANGE_PASSWORD = True  # чтобы поменять пароль авторизованный пользователь должен зайти на user/change_password
 
     # flask-mail
     USER_ENABLE_EMAIL = False
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_USERNAME = 'vadimganica@gmail.com'
-    MAIL_PASSWORD = '2559281335gh'
-    MAIL_DEFAULT_SENDER = 'vadimganica@gmail.com'
-    MAIL_PORT = 587
-    MAIL_USE_SSL = False
-    MAIL_USE_TLS = True
     POSTS_PER_PAGE = 10
 
     # set logging with loguru
     LOGFILE = "log.json"
+
+    # flask babel
+    BABEL_DEFAULT_LOCALE = 'ru'
+
 
 
 class ProductionConfig(Config):

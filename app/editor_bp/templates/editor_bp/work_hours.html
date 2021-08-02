@@ -1,10 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base_edit_template.html' %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+{% endblock %}
+
+{%block sidebar_menu%}
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2><span class="lab la-accusoft"></span> <span>Админ панель</span></h2>
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="{{url_for('editor.add_record')}}"><span
+                        class="las la-igloo"></span><span>Новая запись</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.find_edit_record')}}"><span class="las la-igloo"></span><span>Редактировать запись</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.show_categories')}}"><span class="las la-users"></span><span>Категории</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.menu')}}"><span class="las la-clipboard-list"></span><span>Меню</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.fast_access')}}"><span class="las la-shopping-bag"></span><span>Быстрый доступ</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.show_partners')}}"><span class="las la-receipt"></span><span>Партнеры</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.questions')}}"><span class="las la-user-circle"></span><span>Виртуальная справочная служба</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.readers')}}"><span
+                        class="las la-user-circle"></span><span>Читатели</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.new_arrivals')}}"><span class="las la-user-circle"></span><span>Новые поступления</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.contacts')}}"><span
+                        class="las la-user-circle"></span><span>Контактные данные</span></a>
+            </li>
+            <li>
+                <a href="{{url_for('editor.work_hours')}}" class="active"><span class="las la-user-circle"></span><span>Часы работы</span></a>
+            </li>
+            <li>
+                <a href=""><span class="las la-clipboard-list"></span><span>Метрики</span></a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+{%endblock%}
+{% block header %}
+{% include 'header.html' %}
+{% endblock %}
+{% block form %}
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+
+{% for message in messages %}
+<div class="alert alert-success alert-dismissable" role="alert">
+    <button type="button" class="close" data-bs-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">x</span>
+    </button>
+    {{ message }}
+</div>
+{% endfor %}
+
+{% endif %}
+
+{% endwith %}
+<form action="" method="post" class="form-record">
+    <li>
+        <h3>Редактирование информации о времени работы:</h3>
+        <!--            <span class="required_notification">* Denotes Required Field</span>-->
+    </li>
+    <li>
+        <label>Текст:</label> <input type="text" name="text" value="{{ work_hours.text }}"
+                                     placeholder="Введите Текст...">
+    </li>
+    <li>
+        <label>Текст на английском:</label> <input type="text" name="text_en" value="{{ work_hours.text_en }}"
+                                                   placeholder="Введите Текст...">
+    </li>
+    <li>
+        <label>Текст на казахском:</label> <input type="text" name="text_kz" value="{{ work_hours.text_kz }}"
+                                                  placeholder="Введите Текст...">
+    </li>
+
+
+    <li>
+        <button class="record-button">Изменить</button>
+    </li>
+
+</form>
+{% endblock %}

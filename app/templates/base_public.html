@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="html">
 
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,7 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
     <title>{% block title %}{% endblock %}</title>
 
     {% block head %}{% endblock %}
@@ -106,12 +107,50 @@
                 </div>
                 <div class="panel-body">
                     <div style="padding: 0rem 2rem;">
-                        {{ _('понедельник-пятница - с 10.00 до 19.00 суббота - с 10.00 до 17.00 воскресенье - выходной
-                        ') }}
+                        {%if locale == 'en'%}
+                        {{work_hours.text_en}}
+                        {%elif locale == 'es'%}
+                        {{work_hours.text_kz}}
+                        {%else%}
+                        {{work_hours.text}}
+                        {%endif%}
                     </div>
                 </div>
             </div>
-
+            <a href="{{url_for('public.enroll_in_library')}}">
+                <div class="panel panel-primary panel-right">
+                    <div class="right-panel-heading">
+                        <h3 class="panel-title">
+                            {{ _('Записаться в библиотеку') }}</h3>
+                    </div>
+                </div>
+            </a>
+            <div class="panel panel-primary panel-right">
+                <div class="right-panel-heading">
+                    <h3 class="panel-title">
+                        {{ _('Контакты') }}</h3>
+                </div>
+                <div class="panel-body">
+                    <div style="padding: 0rem 2rem;">
+                        {%if locale == 'en'%}
+                        {{contacts.address_en}}
+                        {%elif locale == 'es'%}
+                        {{contacts.address_kz}}
+                        {%else%}
+                        {{contacts.address}}
+                        {%endif%}
+                         тел. {{contacts.phone}} email: {{contacts.email}}
+                    </div>
+                </div>
+            </div>
+            <a href="{{url_for('public.new_arrivals')}}">
+                <div class="panel panel-primary panel-right">
+                    <div class="right-panel-heading">
+                        <h3 class="panel-title">
+                            {{ _('Новые поступления') }}</h3>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
     </div>
@@ -130,6 +169,8 @@
         <p>{{ _('Карагандинский технический университет') }}</p>
     </div>
 </footer>
+<script type="text/javascript" src="{{url_for('public.static', filename = 'js/index.js')}}"></script>
+{% block script %}{% endblock %}
 </body>
 
 </html>

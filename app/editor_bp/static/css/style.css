@@ -710,6 +710,16 @@ outline: none;
     padding: 10px;
 }
 
+.reader_information{
+    background: white;
+    padding: .7rem;
+    border-radius: .9rem;
+    font-size: 1.1rem;
+}
+.h4-reader{
+    padding: .7rem;
+    padding-top: 1.5rem;
+}
 .news_short_block {
     display: flex;
     padding: 1rem;

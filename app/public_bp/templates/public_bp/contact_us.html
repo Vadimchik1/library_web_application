@@ -55,6 +55,21 @@
 {% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+
+{% if messages %}
+
+{% for message in messages %}
+<div class="alert alert-success alert-dismissable" role="alert">
+    <button type="button" class="close" data-bs-dismiss="alert" aria-label="close">
+    </button>
+    {{ message }}
+</div>
+{% endfor %}
+
+{% endif %}
+
+{% endwith %}
 <form action="" method="post" class="form-contact" >
     <li>
         <h2>Задать вопрос:</h2>

@@ -1,4 +1,4 @@
-from flask import Flask, request, current_app, session, g
+from flask import Flask, session
 from flask_user import UserManager
 from app.admin_bp import blueprint as admin_bp
 from app.public_bp import blueprint as public_bp
