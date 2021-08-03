@@ -118,6 +118,10 @@
     <li>
         <button class="record-button">Изменить</button>
     </li>
+    <li>
+        <a href="{{url_for('editor.delete_record', id=record_item.id)}}" class="btn btn-danger btn-xs"
+                               onclick="return confirm('Вы хотите удалить? ?')">Удалить</a>
+    </li>
 
 </form>
 <script>
@@ -167,4 +171,8 @@
 
 
 </script>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="{{url_for('admin.static', filename='js/bootstrap.min.js')}}"></script>
 {% endblock %}

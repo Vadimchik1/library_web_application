@@ -8,7 +8,7 @@ from loguru import logger
 
 @blueprint.route('/contacts/', methods=['GET', 'POST'])
 @roles_required(['editor', 'admin'])
-# @logger.catch()
+@logger.catch()
 def contacts():
     title = 'Изменение контактных данных.'
     contact = Contacts.query.first()

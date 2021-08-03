@@ -8,7 +8,7 @@ from loguru import logger
 
 @blueprint.route('/work_hours/', methods=['GET', 'POST'])
 @roles_required(['editor', 'admin'])
-# @logger.catch()
+@logger.catch()
 def work_hours():
     title = 'Изменение часов работы. '
     work_hours = WorkHours.query.first()

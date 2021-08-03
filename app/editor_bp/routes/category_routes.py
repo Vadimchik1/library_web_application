@@ -1,7 +1,6 @@
 from flask import render_template, redirect, url_for, flash, request
 from app.editor_bp import blueprint
 from flask.debughelpers import DebugFilesKeyError
-from ..forms import AddRecordForm
 from app.models import db, Category, Record
 from datetime import datetime
 from pathlib import Path
@@ -138,7 +137,6 @@ def record(id):
 @roles_required(['editor', 'admin'])
 @logger.catch()
 def add_record():
-    form = AddRecordForm()
     categories = Category.query.all()
     title = 'Новая запись'
     if request.method == 'POST':
@@ -164,7 +162,7 @@ def add_record():
         db.session.add(record)
         db.session.commit()
         return redirect(url_for('editor.add_record'))
-    return render_template('editor_bp/add_record.html', form=form, categories=categories, title=title)
+    return render_template('editor_bp/add_record.html', categories=categories, title=title)
 
 
 @blueprint.route('/delete-record/<id>/', methods=['GET', 'POST'])
