@@ -3,3 +3,4 @@
 /venv
 .env
 bible.db
+/__pycache__/
