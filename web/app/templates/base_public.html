@@ -95,15 +95,21 @@
             <a href="{{url_for('public.contact_us')}}">
                 <div class="panel panel-primary panel-right">
                     <div class="right-panel-heading">
-                        <h3 class="panel-title">
-                            {{ _('Виртуальная справочная служба') }}</h3>
+                        <ul>
+                            <li class="sidebar-main">
+                                {{ _('Виртуальная справочная служба') }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </a>
             <div class="panel panel-primary panel-right">
                 <div class="right-panel-heading">
-                    <h3 class="panel-title">
-                        {{ _('Часы работы') }}</h3>
+                    <ul>
+                        <li class="sidebar-main">
+                            {{ _('Часы работы') }}
+                        </li>
+                    </ul>
                 </div>
                 <div class="panel-body">
                     <div style="padding: 0rem 2rem;">
@@ -120,15 +126,21 @@
             <a href="{{url_for('public.enroll_in_library')}}">
                 <div class="panel panel-primary panel-right">
                     <div class="right-panel-heading">
-                        <h3 class="panel-title">
-                            {{ _('Записаться в библиотеку') }}</h3>
+                        <ul>
+                            <li class="sidebar-main">
+                                {{ _('Записаться в библиотеку') }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </a>
             <div class="panel panel-primary panel-right">
                 <div class="right-panel-heading">
-                    <h3 class="panel-title">
-                        {{ _('Контакты') }}</h3>
+                    <ul>
+                        <li class="sidebar-main">
+                            {{ _('Контакты') }}
+                        </li>
+                    </ul>
                 </div>
                 <div class="panel-body">
                     <div style="padding: 0rem 2rem;">
@@ -139,15 +151,18 @@
                         {%else%}
                         {{contacts.address}}
                         {%endif%}
-                         тел. {{contacts.phone}} email: {{contacts.email}}
+                        тел. {{contacts.phone}} email: {{contacts.email}}
                     </div>
                 </div>
             </div>
             <a href="{{url_for('public.new_arrivals')}}">
                 <div class="panel panel-primary panel-right">
                     <div class="right-panel-heading">
-                        <h3 class="panel-title">
-                            {{ _('Новые поступления') }}</h3>
+                        <ul>
+                            <li class="sidebar-main">
+                                {{ _('Новые поступления') }}
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </a>

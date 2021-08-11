@@ -3,6 +3,7 @@ from app import create_app
 from app.models import db, Role, User, Contacts, WorkHours
 from flask_user import PasswordManager
 import os
+
 app = create_app()
 
 
@@ -32,11 +33,11 @@ def cooking_app_bd():
         password_manager = PasswordManager(current_app)
         admin = User(username='admin', password=password_manager.hash_password('Admin123'), active=1)
         admin.roles = [Role.query.filter_by(name='admin').first()]
-        admin.roles = [Role.query.filter_by(name='editor').first()]
         db.session.add(admin)
         db.session.commit()
 
 
+#
 # if __name__ == '__main__':
 #     app.run(port=8080)
 if __name__ == '__main__':

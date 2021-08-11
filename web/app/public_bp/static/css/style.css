@@ -108,33 +108,41 @@ flex-wrap: wrap;
   font-weight: 300;
   color: #fff; */
   display: block;
-
-text-decoration: none;
-outline: none;
-font-family: 'Lora', serif;
-
-
+  text-decoration: none;
+  outline: none;
 }
 .menu li.active a{
   font-weight: 700;
   text-decoration:underline;
 }
+.menu li div.mobile{
+  /* color: #fff;
+  font-weight: 300;
+  color: #fff; */
+  display: block;
+  text-decoration: none;
+  outline: none;
+}
+.menu li.active div.mobile{
+  font-weight: 700;
+  text-decoration:underline;
+}
+
 .submenu{
   /* padding-top: 30px;
   flex-direction: column; */
   /* background-color: #007DB2; */
   position: absolute;
   top: 100%;
-left: 0;
-min-width: 100%;
-z-index: 10;
--webkit-transition: 0.5s ease-in-out;
--moz-transition: 0.5s ease-in-out;
--o-transition: 0.5s ease-in-out;
-transition: 0.5s ease-in-out;
-padding: .085rem .47rem;
-border-radius: 7px;
-
+  left: 0;
+  min-width: 100%;
+  z-index: 10;
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  padding: .085rem .47rem;
+  border-radius: 7px;
 }
 .submenu li {
   padding: .34rem 0;
@@ -356,6 +364,7 @@ main{
   border-bottom-color: transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+  font-size: 1.2rem;
 }
 
 .panel-title {
