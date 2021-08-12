@@ -74,9 +74,7 @@ font-size: 1.18rem;
   display: block;
 }
 
-.menu{
 
-}
 .menu {
   height: 1rem;
   /* position: absolute; */
@@ -694,6 +692,112 @@ border: 1px solid #999;
   color: #fff;
   background-color: #357ebd;
 }
+
+
+
+
+
+#bar {
+  background: #3F5883 -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.25);
+  height: 50px;
+  list-style: none;
+  margin: 20px auto;
+  padding: 0 10px;
+  width: 40%;
+}
+
+#bar > li {
+  float: left;
+  margin-right: 30px;
+  position: relative;
+}
+
+#bar > li > a {
+  color: #fff;
+  display: block;
+  font-weight: bold;
+  margin-right: 0;
+  padding: 15px 0;
+  text-decoration: none;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.25);
+  -webkit-transition: all 0.25s;
+}
+
+.dmenu .dsubmenu {
+  background: #fff;
+  border-radius: 0px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  left: -12px;
+  list-style: none;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  top: 38px;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  visibility: hidden;
+  width: 200px;
+}
+
+.no-js .menu:hover .dsubmenu,
+.dmenu-hover:hover .dsubmenu,
+.dmenu-click.dmenu-active .dsubmenu {
+  opacity: 1;
+  top: 100%;
+  visibility: visible;
+}
+
+.dmenu .dsubmenu:before,
+.dmenu .dsubmenu::before {
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  content: "";
+  height: 0;
+  left: 24px;
+  position: absolute;
+  top: -6px;
+  width: 0;
+}
+
+.dmenu .dsubmenu li {
+  border-bottom: 1px solid #EBEBEB;
+  padding: 7px 10px;
+}
+
+.dmenu .dsubmenu li:last-child {
+  border-bottom: none;
+}
+
+.dmenu .dsubmenu a {
+  color: #777;
+  display: inline-block;
+  line-height: 1.2em;
+  padding: 5px 0;
+  text-decoration: none;
+}
+
+.dmenu .dsubmenu a:hover {
+   color: #3F5883;
+}
+
+.dmenu-right .dsubmenu {
+   left: auto;
+  right: -12px;
+  text-align: right;
+}
+
+.dmenu-right .dsubmenu:before,
+.dmenu-right .dsubmenu::before {
+  left: auto;
+  right: 24px;
+}
+
+
+
 
 @media only screen and (max-width: 1200px) {
   .header-up {

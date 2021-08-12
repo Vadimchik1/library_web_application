@@ -5,56 +5,53 @@
 
 {% endblock %}
 
-
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="{{url_for('public.static', filename= 'js/menu.js')}}"></script>
+{% endblock %}
 {% block hnavbar %}
 <nav class="topnav">
-
     <ul class="menu">
         {% for el in menu.keys() %}
         <li><a href="{%if el.is_parent%}
         {% else %}
         {{el.url}}
-        {%endif%}">
-            {%if locale == 'en'%}
-            {{el.name_en}}
-            {%elif locale == 'es'%}
-            {{el.name_kz}}
-            {%else%}
-            {{el.name}}
-            {%endif%}
-        </a>
+        {%endif%}">{{el.name}}</a>
             <ul class="submenu">
                 {%for elem in menu[el]%}
-                {% if elem.is_parent == True %}
-                <li><a href="{{elem.url}}">
-                    {%if locale == 'en'%}
-                    {{elem.name_en}}
-                    {%elif locale == 'es'%}
-                    {{elem.name_kz}}
-                    {%else%}
-                    {{elem.name}}
-                    {%endif%}
-                </a></li>
-                {% else %}
-                <li class="parent"><a href="{{elem.url}}">
-                    {%if locale == 'en'%}
-                    {{elem.name_en}}
-                    {%elif locale == 'es'%}
-                    {{elem.name_kz}}
-                    {%else%}
-                    {{elem.name}}
-                    {%endif%}
-                </a></li>
-                {% endif %}
+                <li><a href="{{elem.url}}">{{elem.name}}</a></li>
                 {%endfor%}
             </ul>
         </li>
         {% endfor %}
-
-
     </ul>
-
+    <ul id="bar">
+        {% for el in menu.keys() %}
+        <li class="dmenu dmenu-right dmenu-click">
+            <a href="{%if el.is_parent%}
+                     #
+                     {% else %}
+                     {{el.url}}
+                     {%endif%}" class="dbutton">{{el.name}}</a>
+            <ul class="dsubmenu">
+                {%for elem in menu[el]%}
+                <li><a href="{{elem.url}}">{{elem.name}}</a></li>
+                {%endfor%}
+            </ul>
+        </li>
+        {% endfor %}
+        <li class="dmenu dmenu-right dmenu-click">
+            <a href="#" class="dbutton">Button 6</a>
+            <ul class="dsubmenu">
+                <li><a href="#">Menu item 1</a></li>
+                <li><a href="#">Menu item 2</a></li>
+                <li><a href="#">Menu item 3</a></li>
+                <li><a href="#">Menu item 4</a></li>
+            </ul>
+        </li>
+    </ul>
 </nav>
+
 {% endblock %}
 
 {% block content %}
@@ -121,4 +118,8 @@
         <li><a href="./?page={{ pages.next_num }}">&rang;</a></li>
     </ul>
 </div>
+
 {% endblock %}
+
+
+
