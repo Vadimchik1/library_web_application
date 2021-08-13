@@ -695,17 +695,14 @@ border: 1px solid #999;
 
 
 
-
-
 #bar {
-  background: #3F5883 -webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
   border-radius: 3px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.25);
-  height: 50px;
   list-style: none;
-  margin: 20px auto;
-  padding: 0 10px;
-  width: 40%;
+  display:flex;
+  justify-content: start;
+  align-content: space-around;
+  padding-left: 1.5rem;
+
 }
 
 #bar > li {
@@ -717,7 +714,7 @@ border: 1px solid #999;
 #bar > li > a {
   color: #fff;
   display: block;
-  font-weight: bold;
+  font-weight: normal;
   margin-right: 0;
   padding: 15px 0;
   text-decoration: none;
@@ -740,6 +737,7 @@ border: 1px solid #999;
   transition: all 0.25s;
   visibility: hidden;
   width: 200px;
+  z-index: 1;
 }
 
 .no-js .menu:hover .dsubmenu,
@@ -830,6 +828,13 @@ border: 1px solid #999;
 @media only screen and (max-width: 1000px) {
   .container {
       max-width: 90%;
+    
+  }
+  .topnav #bar {
+    flex-direction: column;
+  }
+  .header .topnav {
+    height: unset;
   }
 }
 
