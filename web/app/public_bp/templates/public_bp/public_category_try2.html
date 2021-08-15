@@ -6,13 +6,14 @@
 {% endblock %}
 {% block hnavbar %}
 <nav class="topnav">
-    <ul class="menu">
+    <ul id="bar">
         {% for el in menu.keys() %}
-        <li>
-            {%if el.is_parent%}
-            {% else %}
-            <a href="{{el.url}}"></a>
-            {%endif%}
+        <li class="dmenu dmenu-right dmenu-click">
+            <a href="{%if el.is_parent%}
+                     #bar
+                     {% else %}
+                     {{el.url}}
+                     {%endif%}" class="dbutton">
                 {%if locale == 'en'%}
                 {{el.name_en}}
                 {%elif locale == 'es'%}
@@ -20,9 +21,9 @@
                 {%else%}
                 {{el.name}}
                 {%endif%}
-            <ul class="submenu">
+            </a>
+            <ul class="dsubmenu">
                 {%for elem in menu[el]%}
-                {% if elem.is_parent == True %}
                 <li><a href="{{elem.url}}">
                     {%if locale == 'en'%}
                     {{elem.name_en}}
@@ -32,17 +33,6 @@
                     {{elem.name}}
                     {%endif%}
                 </a></li>
-                {% else %}
-                <li class="parent"><a href="{{elem.url}}">
-                    {%if locale == 'en'%}
-                    {{elem.name_en}}
-                    {%elif locale == 'es'%}
-                    {{elem.name_kz}}
-                    {%else%}
-                    {{elem.name}}
-                    {%endif%}
-                </a></li>
-                {% endif %}
                 {%endfor%}
             </ul>
         </li>
