@@ -1,8 +1,5 @@
-/log.json
+web/log.json
+web/.env
 .idea
-/venv
-.env
-bible.db
 /__pycache__/
-.DS_Store
-web/venv/
+/venv
