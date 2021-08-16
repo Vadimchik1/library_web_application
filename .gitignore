@@ -5,3 +5,4 @@
 bible.db
 /__pycache__/
 .DS_Store
+web/venv/
