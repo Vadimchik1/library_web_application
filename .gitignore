@@ -1,5 +1,5 @@
 web/log.json
 web/.env
-.idea
+/.idea/
 /__pycache__/
 /venv
