@@ -3,6 +3,7 @@ web/.env
 /.idea/
 /__pycache__/
 /venv
+.DS_Store
 
 
 # Created by .ignore support plugin (hsz.mobi)
