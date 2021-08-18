@@ -42,7 +42,7 @@ def index():
         page = int(page)
     else:
         page = 1
-    records = Record.query.order_by(Record.created_at.desc())
+    records = Record.query.order_by(Record.id.desc())
     pages = records.paginate(page=page, per_page=4)
 
     partners = Partners.query.all()
