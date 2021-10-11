@@ -7,6 +7,9 @@ services:
       - DEBUG=1
     networks:
       - flask_network
+    depends_on:
+      - db
+    entrypoint: /code/entrypoint.sh
 
   proxy:
     build: proxy
@@ -24,7 +27,7 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=bible
+      - POSTGRES_DB=library
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
